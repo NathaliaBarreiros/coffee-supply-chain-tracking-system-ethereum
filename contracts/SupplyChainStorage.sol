@@ -15,6 +15,9 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     event AuthorizedCaller(address caller);
     event DeAuthorizedCaller(address caller);
 
+    event UserUpdate(address userAddress);
+    event UserRoleUpdate(address userAddress);
+
     modifier onlyAuthCaller() {
         lastAccess = msg.sender;
         require(authorizedCaller[msg.sender] == 1);
@@ -39,7 +42,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         return true;
     }
 
-    function deAuthorizedCaller(address _caller)
+    function deAuthorizeCaller(address _caller)
         public
         onlyOwner
         returns (bool)
@@ -169,6 +172,8 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         userDetails[_userAddress] = userData;
         userRole[_userAddress] = _role;
 
+        emit UserUpdate(_userAddress);
+        emit UserRoleUpdate(_userAddress);
         return true;
     }
 
