@@ -359,7 +359,7 @@ contract CoffeeSupplyChain is Ownable {
             _arrivalDateSP,
             _warehouseName,
             _warehouseAddress,
-            _salePoiuserntAddress,
+            _salePointAddress,
             _shipPriceSP,
             _productPrice
         );
