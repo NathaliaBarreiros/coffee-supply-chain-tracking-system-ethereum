@@ -1,7 +1,6 @@
 const CoffeeSupplyChain = artifacts.require(
 	"../contracts/CoffeeSupplyChain.sol"
 );
-// CoffeeSupplyChain
 const SupplyChainUser = artifacts.require("SupplyChainUser");
 const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 
