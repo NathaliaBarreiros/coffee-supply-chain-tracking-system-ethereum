@@ -1332,19 +1332,908 @@ contract("CoffeeSupplyChain", function (accounts) {
 			assert.equal(activityData[2], _packDate, "Packaging date checked:");
 			assert.equal(activityData[3], _packPrice, "Packaging price checked:");
 		});
+
+		it("should add shipping to retailer data", async () => {
+			_name = "Santiago Endara";
+			_contactNo = "0978065745";
+			_role = "PROCESSOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				processor,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ernesto Villacis";
+			_contactNo = "0956034567";
+			_role = "GRAIN_INSPECTOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				grainInspector,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Carmen Buitron";
+			_contactNo = "0967854734";
+			_role = "AGGLOMERATOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				agglomerator,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Manuel Utreras";
+			_contactNo = "0934765345";
+			_role = "SHIPPER_PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperPacker,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Pamela Feder";
+			_contactNo = "0956876456";
+			_role = "PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				packer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ricardo Moreno";
+			_contactNo = "0934568231";
+			_role = "SHIPPER_RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperRetailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			await prepareFarmer(this.supplyChainUser);
+
+			var { logs } = await addFarmBasicDetails(this.coffeeSupplyChain);
+
+			const farmDetailsEvent = logs.find((e) => e.event === "SetFarmDetails");
+			batchNo = farmDetailsEvent.args.batchNo;
+
+			await addHarvestData(this.coffeeSupplyChain, batchNo);
+
+			const _procAddress = "37QM+GM2, Nanegalito";
+			const _typeOfDrying = "Artesanal";
+			const _roastImageHash = "0x40op09";
+			const _roastTemp = "34";
+			const _typeOfRoast = "Rubio";
+			const _roastDate = "15-08-2020";
+			const _millDate = "16-08-2020";
+			const _processorPrice = 250;
+
+			await this.coffeeSupplyChain.addProcessData(
+				batchNo,
+				_procAddress,
+				_typeOfDrying,
+				_roastImageHash,
+				_roastTemp,
+				_typeOfRoast,
+				_roastDate,
+				_millDate,
+				_processorPrice,
+				{ from: processor }
+			);
+
+			const _tasteScore = 85;
+			const _grainPrice = 500;
+
+			await this.coffeeSupplyChain.addGrainData(
+				batchNo,
+				_tasteScore,
+				_grainPrice,
+				{ from: grainInspector }
+			);
+
+			const _agglomAddress =
+				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+			const _agglomDate = "10-09-2020";
+			const _storagePrice = 100;
+
+			await this.coffeeSupplyChain.addAgglomData(
+				batchNo,
+				_agglomAddress,
+				_agglomDate,
+				_storagePrice,
+				{ from: agglomerator }
+			);
+
+			const _transportTypeP = "Camion";
+			const _pickupDateP = "24-09-2020";
+			const _shipPriceP = 50;
+
+			await this.coffeeSupplyChain.addShipPackerData(
+				batchNo,
+				_transportTypeP,
+				_pickupDateP,
+				_shipPriceP,
+				{ from: shipperPacker }
+			);
+
+			const _packAddress = "Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _arrivalDateP = "26-09-2020";
+			const _packDate = "30-09-20202";
+			const _packPrice = 100;
+
+			await this.coffeeSupplyChain.addPackData(
+				batchNo,
+				_packAddress,
+				_arrivalDateP,
+				_packDate,
+				_packPrice,
+				{ from: packer }
+			);
+
+			const _transportTypeR = "Camion";
+			const _pickupDateR = "05-10-2020";
+			const _shipPriceR = 50;
+
+			var { logs } = await this.coffeeSupplyChain.addShipRetailerData(
+				batchNo,
+				_transportTypeR,
+				_pickupDateR,
+				_shipPriceR,
+				{ from: shipperRetailer }
+			);
+
+			const shipRetailerEvent = logs.find(
+				(e) => e.event === "DoneShippingRetailer"
+			);
+			assert.exists(
+				shipRetailerEvent,
+				"DoneShippingRetailer event does not exists"
+			);
+		});
+
+		it("should get shipping to retailer data", async () => {
+			_name = "Santiago Endara";
+			_contactNo = "0978065745";
+			_role = "PROCESSOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				processor,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ernesto Villacis";
+			_contactNo = "0956034567";
+			_role = "GRAIN_INSPECTOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				grainInspector,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Carmen Buitron";
+			_contactNo = "0967854734";
+			_role = "AGGLOMERATOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				agglomerator,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Manuel Utreras";
+			_contactNo = "0934765345";
+			_role = "SHIPPER_PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperPacker,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Pamela Feder";
+			_contactNo = "0956876456";
+			_role = "PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				packer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ricardo Moreno";
+			_contactNo = "0934568231";
+			_role = "SHIPPER_RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperRetailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			await prepareFarmer(this.supplyChainUser);
+
+			var { logs } = await addFarmBasicDetails(this.coffeeSupplyChain);
+
+			const farmDetailsEvent = logs.find((e) => e.event === "SetFarmDetails");
+			batchNo = farmDetailsEvent.args.batchNo;
+
+			await addHarvestData(this.coffeeSupplyChain, batchNo);
+
+			const _procAddress = "37QM+GM2, Nanegalito";
+			const _typeOfDrying = "Artesanal";
+			const _roastImageHash = "0x40op09";
+			const _roastTemp = "34";
+			const _typeOfRoast = "Rubio";
+			const _roastDate = "15-08-2020";
+			const _millDate = "16-08-2020";
+			const _processorPrice = 250;
+
+			await this.coffeeSupplyChain.addProcessData(
+				batchNo,
+				_procAddress,
+				_typeOfDrying,
+				_roastImageHash,
+				_roastTemp,
+				_typeOfRoast,
+				_roastDate,
+				_millDate,
+				_processorPrice,
+				{ from: processor }
+			);
+
+			const _tasteScore = 85;
+			const _grainPrice = 500;
+
+			await this.coffeeSupplyChain.addGrainData(
+				batchNo,
+				_tasteScore,
+				_grainPrice,
+				{ from: grainInspector }
+			);
+
+			const _agglomAddress =
+				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+			const _agglomDate = "10-09-2020";
+			const _storagePrice = 100;
+
+			await this.coffeeSupplyChain.addAgglomData(
+				batchNo,
+				_agglomAddress,
+				_agglomDate,
+				_storagePrice,
+				{ from: agglomerator }
+			);
+
+			const _transportTypeP = "Camion";
+			const _pickupDateP = "24-09-2020";
+			const _shipPriceP = 50;
+
+			await this.coffeeSupplyChain.addShipPackerData(
+				batchNo,
+				_transportTypeP,
+				_pickupDateP,
+				_shipPriceP,
+				{ from: shipperPacker }
+			);
+
+			const _packAddress = "Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _arrivalDateP = "26-09-2020";
+			const _packDate = "30-09-20202";
+			const _packPrice = 100;
+
+			await this.coffeeSupplyChain.addPackData(
+				batchNo,
+				_packAddress,
+				_arrivalDateP,
+				_packDate,
+				_packPrice,
+				{ from: packer }
+			);
+
+			const _transportTypeR = "Camion";
+			const _pickupDateR = "05-10-2020";
+			const _shipPriceR = 50;
+
+			await this.coffeeSupplyChain.addShipRetailerData(
+				batchNo,
+				_transportTypeR,
+				_pickupDateR,
+				_shipPriceR,
+				{ from: shipperRetailer }
+			);
+
+			const activityData =
+				await this.coffeeSupplyChain.getShipRetailerData.call(batchNo, {
+					from: shipperRetailer,
+				});
+
+			assert.equal(
+				activityData[0],
+				_transportTypeR,
+				"Transport type for shipping to retailer checked:"
+			);
+			assert.equal(
+				activityData[1],
+				_pickupDateR,
+				"Pickup date at packer checked:"
+			);
+			assert.equal(
+				activityData[2],
+				_shipPriceR,
+				"Shipping to retailer price checked:"
+			);
+		});
+
+		it("should add retailer data", async () => {
+			_name = "Santiago Endara";
+			_contactNo = "0978065745";
+			_role = "PROCESSOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				processor,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ernesto Villacis";
+			_contactNo = "0956034567";
+			_role = "GRAIN_INSPECTOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				grainInspector,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Carmen Buitron";
+			_contactNo = "0967854734";
+			_role = "AGGLOMERATOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				agglomerator,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Manuel Utreras";
+			_contactNo = "0934765345";
+			_role = "SHIPPER_PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperPacker,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Pamela Feder";
+			_contactNo = "0956876456";
+			_role = "PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				packer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ricardo Moreno";
+			_contactNo = "0934568231";
+			_role = "SHIPPER_RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperRetailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Sandra Sandoval";
+			_contactNo = "0979065456";
+			_role = "RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				retailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			await prepareFarmer(this.supplyChainUser);
+
+			var { logs } = await addFarmBasicDetails(this.coffeeSupplyChain);
+
+			const farmDetailsEvent = logs.find((e) => e.event === "SetFarmDetails");
+			batchNo = farmDetailsEvent.args.batchNo;
+
+			await addHarvestData(this.coffeeSupplyChain, batchNo);
+
+			const _procAddress = "37QM+GM2, Nanegalito";
+			const _typeOfDrying = "Artesanal";
+			const _roastImageHash = "0x40op09";
+			const _roastTemp = "34";
+			const _typeOfRoast = "Rubio";
+			const _roastDate = "15-08-2020";
+			const _millDate = "16-08-2020";
+			const _processorPrice = 250;
+
+			await this.coffeeSupplyChain.addProcessData(
+				batchNo,
+				_procAddress,
+				_typeOfDrying,
+				_roastImageHash,
+				_roastTemp,
+				_typeOfRoast,
+				_roastDate,
+				_millDate,
+				_processorPrice,
+				{ from: processor }
+			);
+
+			const _tasteScore = 85;
+			const _grainPrice = 500;
+
+			await this.coffeeSupplyChain.addGrainData(
+				batchNo,
+				_tasteScore,
+				_grainPrice,
+				{ from: grainInspector }
+			);
+
+			const _agglomAddress =
+				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+			const _agglomDate = "10-09-2020";
+			const _storagePrice = 100;
+
+			await this.coffeeSupplyChain.addAgglomData(
+				batchNo,
+				_agglomAddress,
+				_agglomDate,
+				_storagePrice,
+				{ from: agglomerator }
+			);
+
+			const _transportTypeP = "Camion";
+			const _pickupDateP = "24-09-2020";
+			const _shipPriceP = 50;
+
+			await this.coffeeSupplyChain.addShipPackerData(
+				batchNo,
+				_transportTypeP,
+				_pickupDateP,
+				_shipPriceP,
+				{ from: shipperPacker }
+			);
+
+			const _packAddress = "Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _arrivalDateP = "26-09-2020";
+			const _packDate = "30-09-20202";
+			const _packPrice = 100;
+
+			await this.coffeeSupplyChain.addPackData(
+				batchNo,
+				_packAddress,
+				_arrivalDateP,
+				_packDate,
+				_packPrice,
+				{ from: packer }
+			);
+
+			const _transportTypeR = "Camion";
+			const _pickupDateR = "05-10-2020";
+			const _shipPriceR = 50;
+
+			await this.coffeeSupplyChain.addShipRetailerData(
+				batchNo,
+				_transportTypeR,
+				_pickupDateR,
+				_shipPriceR,
+				{ from: shipperRetailer }
+			);
+
+			const _arrivalDateW = "08-10-2020";
+			const _arrivalDateSP = "10-10-2020";
+			const _warehouseName = "La Favorita";
+			const _warehouseAddress = "Av Gral Enriquez";
+			const _salePointAddress =
+				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521";
+			const _shipPriceSP = 30;
+			const _productPrice = 5;
+
+			var { logs } = await this.coffeeSupplyChain.addRetailerData(
+				batchNo,
+				_arrivalDateW,
+				_arrivalDateSP,
+				_warehouseName,
+				_warehouseAddress,
+				_salePointAddress,
+				_shipPriceSP,
+				_productPrice,
+				{ from: retailer }
+			);
+
+			const retailerEvent = logs.find((e) => e.event === "DoneRetailer");
+			assert.exists(retailerEvent, "DoneRetailer event does not exists");
+		});
+
+		it("should get retailer data", async () => {
+			_name = "Santiago Endara";
+			_contactNo = "0978065745";
+			_role = "PROCESSOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				processor,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ernesto Villacis";
+			_contactNo = "0956034567";
+			_role = "GRAIN_INSPECTOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				grainInspector,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Carmen Buitron";
+			_contactNo = "0967854734";
+			_role = "AGGLOMERATOR";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				agglomerator,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Manuel Utreras";
+			_contactNo = "0934765345";
+			_role = "SHIPPER_PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperPacker,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Pamela Feder";
+			_contactNo = "0956876456";
+			_role = "PACKER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				packer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Ricardo Moreno";
+			_contactNo = "0934568231";
+			_role = "SHIPPER_RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				shipperRetailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			_name = "Sandra Sandoval";
+			_contactNo = "0979065456";
+			_role = "RETAILER";
+			_isActive = true;
+			_profileHash = "Sample Hash";
+
+			await this.supplyChainUser.updateUserForAdmin(
+				retailer,
+				_name,
+				_contactNo,
+				_role,
+				_isActive,
+				_profileHash,
+				{ from: authorizedCaller }
+			);
+
+			await prepareFarmer(this.supplyChainUser);
+
+			var { logs } = await addFarmBasicDetails(this.coffeeSupplyChain);
+
+			const farmDetailsEvent = logs.find((e) => e.event === "SetFarmDetails");
+			batchNo = farmDetailsEvent.args.batchNo;
+
+			await addHarvestData(this.coffeeSupplyChain, batchNo);
+
+			const _procAddress = "37QM+GM2, Nanegalito";
+			const _typeOfDrying = "Artesanal";
+			const _roastImageHash = "0x40op09";
+			const _roastTemp = "34";
+			const _typeOfRoast = "Rubio";
+			const _roastDate = "15-08-2020";
+			const _millDate = "16-08-2020";
+			const _processorPrice = 250;
+
+			await this.coffeeSupplyChain.addProcessData(
+				batchNo,
+				_procAddress,
+				_typeOfDrying,
+				_roastImageHash,
+				_roastTemp,
+				_typeOfRoast,
+				_roastDate,
+				_millDate,
+				_processorPrice,
+				{ from: processor }
+			);
+
+			const _tasteScore = 85;
+			const _grainPrice = 500;
+
+			await this.coffeeSupplyChain.addGrainData(
+				batchNo,
+				_tasteScore,
+				_grainPrice,
+				{ from: grainInspector }
+			);
+
+			const _agglomAddress =
+				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+			const _agglomDate = "10-09-2020";
+			const _storagePrice = 100;
+
+			await this.coffeeSupplyChain.addAgglomData(
+				batchNo,
+				_agglomAddress,
+				_agglomDate,
+				_storagePrice,
+				{ from: agglomerator }
+			);
+
+			const _transportTypeP = "Camion";
+			const _pickupDateP = "24-09-2020";
+			const _shipPriceP = 50;
+
+			await this.coffeeSupplyChain.addShipPackerData(
+				batchNo,
+				_transportTypeP,
+				_pickupDateP,
+				_shipPriceP,
+				{ from: shipperPacker }
+			);
+
+			const _packAddress = "Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _arrivalDateP = "26-09-2020";
+			const _packDate = "30-09-20202";
+			const _packPrice = 100;
+
+			await this.coffeeSupplyChain.addPackData(
+				batchNo,
+				_packAddress,
+				_arrivalDateP,
+				_packDate,
+				_packPrice,
+				{ from: packer }
+			);
+
+			const _transportTypeR = "Camion";
+			const _pickupDateR = "05-10-2020";
+			const _shipPriceR = 50;
+
+			await this.coffeeSupplyChain.addShipRetailerData(
+				batchNo,
+				_transportTypeR,
+				_pickupDateR,
+				_shipPriceR,
+				{ from: shipperRetailer }
+			);
+
+			const _arrivalDateW = "08-10-2020";
+			const _arrivalDateSP = "10-10-2020";
+			const _warehouseName = "La Favorita";
+			const _warehouseAddress = "Av Gral Enriquez";
+			const _salePointAddress =
+				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521";
+			const _shipPriceSP = 30;
+			const _productPrice = 5;
+
+			await this.coffeeSupplyChain.addRetailerData(
+				batchNo,
+				_arrivalDateW,
+				_arrivalDateSP,
+				_warehouseName,
+				_warehouseAddress,
+				_salePointAddress,
+				_shipPriceSP,
+				_productPrice,
+				{ from: retailer }
+			);
+
+			const activityData = await this.coffeeSupplyChain.getRetailerData.call(
+				batchNo,
+				{ from: retailer }
+			);
+
+			assert.equal(
+				activityData[0],
+				_arrivalDateW,
+				"Arrival date at warehouse checked:"
+			);
+			assert.equal(
+				activityData[1],
+				_arrivalDateSP,
+				"Arrival date at final sale point checked:"
+			);
+			assert.equal(activityData[2], _warehouseName, "Warehouse name checked:");
+			assert.equal(
+				activityData[3],
+				_warehouseAddress,
+				"Warehouse address checked:"
+			);
+			assert.equal(
+				activityData[4],
+				_salePointAddress,
+				"Final sale point address checked:"
+			);
+			assert.equal(
+				activityData[5],
+				_shipPriceSP,
+				"Shipping at final sale point price checked:"
+			);
+			assert.equal(
+				activityData[6],
+				_productPrice,
+				"Final product price at sale point checked:"
+			);
+		});
 	});
 });
-
-// /* User Roles
-//         SUPER_ADMIN,
-//         //////FARM_INSPECTION,
-//         FARMER,
-//         PROCESSOR,
-//         GRAIN_INSPECTION,
-//         AGGLOMERATOR,SetFarmDetails
-//         SHIPPER_PACKER,
-//         PACKER,
-//         SHIPPER_RETAILER,
-//         RETAILER,
-//         CONSUMER
-//     */
