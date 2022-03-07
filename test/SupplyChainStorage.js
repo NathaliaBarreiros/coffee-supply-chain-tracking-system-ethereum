@@ -28,7 +28,6 @@ contract("SupplyChainStorage", function (accounts) {
 			(e) => e.event === "AuthorizedCaller"
 		);
 		assert.exists(authorizedCallerEvent, "AuthorizedCaller does not exists");
-		// console.log(authorizedCallerEvent);
 	});
 
 	it("should DeAuthorize", async () => {
@@ -41,7 +40,6 @@ contract("SupplyChainStorage", function (accounts) {
 			(e) => e.event === "DeAuthorizedCaller"
 		);
 		assert.exists(deAuthorizeCallerEvent, "DeAuthorizedCaller does not exists");
-		// console.log(deAuthorizeCallerEvent);
 	});
 
 	it("should Add New User", async () => {
@@ -62,7 +60,6 @@ contract("SupplyChainStorage", function (accounts) {
 
 		const user = await this.storageContract.getUser.call(userAddress);
 
-		//expect(_contactNo).to.equal(user[1]);
 		assert.equal(user[0], _name, "Name checked:");
 		assert.equal(user[1], _contactNo, "Contact No checked:");
 		assert.equal(user[2], _role, "Role checked:");

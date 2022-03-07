@@ -10,7 +10,6 @@ const _profileHash = "Qmadp4L61MaQQX5NFfjqaihnY8r7PmogqZL6wvX1HqwL";
 contract("SupplyChainUser", function (accounts) {
 	const spenderAddress = accounts[0];
 	const userAddress = accounts[1];
-	// const anotherAddress = accounts[2];
 
 	beforeEach(async () => {
 		this.storageContract = await SupplyChainStorage.new({
