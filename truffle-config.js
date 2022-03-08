@@ -7,8 +7,8 @@ module.exports = {
 		ganache: {
 			host: "localhost",
 			port: 7545,
-			gas: 6000000, //default gas limit
-			network_id: "*", //Match any network id (connect to any network available on port 7545 of localhost)
+			gas: 6000000,
+			network_id: "*",
 		},
 		ropsten: {
 			provider: () =>
@@ -16,10 +16,10 @@ module.exports = {
 					env.MNEMONIC,
 					`https://ropsten.infura.io/v3/${env.PROJECT_ID}`
 				),
-			network_id: 3, // Ropsten's id
-			gas: 6500000, // Ropsten has a lower block limit than mainnet
-			confirmations: 2, // # of confs to wait between deployments. (default: 0)
-			timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+			network_id: 3,
+			gas: 6500000,
+			confirmations: 2,
+			timeoutBlocks: 200,
 			skipDryRun: true,
 		},
 	},
