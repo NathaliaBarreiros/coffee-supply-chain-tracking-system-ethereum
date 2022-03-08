@@ -45331,6 +45331,97 @@
     "version": "0.8.7+commit.e28d00a7.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x8afeca650897be3183b7c0d24eba96a1b990f75c4bd74a0cfb2c0a71aec48e61": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "caller",
+              "type": "address"
+            }
+          ],
+          "name": "AuthorizedCaller",
+          "type": "event"
+        },
+        "0x9e8ca6ff03906e81e8a6a03d4f96b7edb0b97f0ed9d07ef1b699fff634385496": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "caller",
+              "type": "address"
+            }
+          ],
+          "name": "DeAuthorizedCaller",
+          "type": "event"
+        },
+        "0xf8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c64820": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipRenounced",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previusOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x5108391b825bd4c3d7f3c6a8d5cb1dfb3d7db4e2663bdef2d6a43643d6c38513": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "userAddress",
+              "type": "address"
+            }
+          ],
+          "name": "UserRoleUpdate",
+          "type": "event"
+        },
+        "0x1d222b775a8ac40f88e57f60a9f9cef32825dee88b7d0a2e757e7dd2082cbe77": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "userAddress",
+              "type": "address"
+            }
+          ],
+          "name": "UserUpdate",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x531df0B1CA9eb44AC3B7833085FBDcADFd8E6eE8",
+      "transactionHash": "0x56c3d286c2e35e94f1b40c05b7894982eba34e614b0e09b9038312c482e29b24"
+    },
     "5777": {
       "events": {
         "0x8afeca650897be3183b7c0d24eba96a1b990f75c4bd74a0cfb2c0a71aec48e61": {
@@ -45424,7 +45515,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-03-07T20:09:04.208Z",
+  "updatedAt": "2022-03-07T23:46:03.936Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
