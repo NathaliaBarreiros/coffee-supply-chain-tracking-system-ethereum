@@ -28,4 +28,8 @@ module.exports = {
 			version: "0.8.7",
 		},
 	},
+	plugins: ["truffle-plugin-verify"],
+	api_keys: {
+		etherscan: `${env.MY_API_KEY}`,
+	},
 };
