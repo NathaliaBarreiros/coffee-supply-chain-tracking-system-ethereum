@@ -1,6 +1,7 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const { env } = require("process");
 require("dotenv").config();
+const my_address = "0x9E733B413600444663EF0FFd8116A279D8C07D7D";
 
 module.exports = {
 	networks: {
@@ -22,10 +23,23 @@ module.exports = {
 			timeoutBlocks: 200,
 			skipDryRun: true,
 		},
+		rinkeby: {
+			provider: () =>
+				new HDWalletProvider(
+					env.MNEMONIC_2,
+					`https://rinkeby.infura.io/v3/${env.PROJECT_ID}`
+				),
+			network_id: 4,
+			gas: 6500000,
+			confirmations: 2,
+			timeoutBlocks: 200,
+			skipDryRun: true,
+			from: my_address,
+		},
 	},
 	compilers: {
 		solc: {
-			version: "0.8.7",
+			version: "0.8.9",
 		},
 	},
 	plugins: ["truffle-plugin-verify"],
