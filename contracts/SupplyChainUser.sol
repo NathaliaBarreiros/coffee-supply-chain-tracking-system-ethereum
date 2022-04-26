@@ -87,6 +87,7 @@ contract SupplyChainUser is Ownable {
 
     function getUser(address _userAddress)
         public
+        view
         returns (
             string memory name,
             string memory contactNo,
