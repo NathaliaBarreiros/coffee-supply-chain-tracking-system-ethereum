@@ -2,7 +2,7 @@ const SupplyChainUser = artifacts.require("SupplyChainUser");
 const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 
 const _name = "John Quevedo";
-const _contactNo = "0979081091";
+const _email = "farmertest@gmail.com";
 const _role = "FARMER";
 const _isActive = true;
 const _profileHash = "Qmadp4L61MaQQX5NFfjqaihnY8r7PmogqZL6wvX1HqwL";
@@ -29,7 +29,7 @@ contract("SupplyChainUser", function (accounts) {
 	it("should Add/Update New User", async () => {
 		const { logs } = await this.userContract.updateUser(
 			_name,
-			_contactNo,
+			_email,
 			_role,
 			_isActive,
 			_profileHash,
@@ -51,7 +51,7 @@ contract("SupplyChainUser", function (accounts) {
 		const { logs } = await this.userContract.updateUserForAdmin(
 			userAddress,
 			_name,
-			_contactNo,
+			_email,
 			_role,
 			_isActive,
 			_profileHash,
@@ -73,7 +73,7 @@ contract("SupplyChainUser", function (accounts) {
 		const { logs } = await this.userContract.updateUserForAdmin(
 			userAddress,
 			_name,
-			_contactNo,
+			_email,
 			_role,
 			_isActive,
 			_profileHash,
@@ -104,7 +104,7 @@ function checkUserExists(logs, callback) {
 
 function checkUserData(user, callback) {
 	assert.equal(user[0], _name, "Name checked:");
-	assert.equal(user[1], _contactNo, "Contact No checked:");
+	assert.equal(user[1], _email, "email No checked:");
 	assert.equal(user[2], _role, "Role checked:");
 	assert.equal(user[3], _isActive, "isActive checked:");
 	assert.equal(user[4], _profileHash, "Profile Hash checked:");

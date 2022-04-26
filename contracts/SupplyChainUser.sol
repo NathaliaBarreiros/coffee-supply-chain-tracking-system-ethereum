@@ -9,7 +9,7 @@ contract SupplyChainUser is Ownable {
     event UserUpdate(
         address indexed user,
         string name,
-        string contactNo,
+        string email,
         string role,
         bool isActive,
         string profileHash
@@ -24,7 +24,7 @@ contract SupplyChainUser is Ownable {
 
     function updateUser(
         string memory _name,
-        string memory _contactNo,
+        string memory _email,
         string memory _role,
         bool _isActive,
         string memory _profileHash
@@ -34,7 +34,7 @@ contract SupplyChainUser is Ownable {
         bool status = supplyChainStorage.setUser(
             msg.sender,
             _name,
-            _contactNo,
+            _email,
             _role,
             _isActive,
             _profileHash
@@ -43,7 +43,7 @@ contract SupplyChainUser is Ownable {
         emit UserUpdate(
             msg.sender,
             _name,
-            _contactNo,
+            _email,
             _role,
             _isActive,
             _profileHash
@@ -56,7 +56,7 @@ contract SupplyChainUser is Ownable {
     function updateUserForAdmin(
         address _userAddress,
         string memory _name,
-        string memory _contactNo,
+        string memory _email,
         string memory _role,
         bool _isActive,
         string memory _profileHash
@@ -66,7 +66,7 @@ contract SupplyChainUser is Ownable {
         bool status = supplyChainStorage.setUser(
             _userAddress,
             _name,
-            _contactNo,
+            _email,
             _role,
             _isActive,
             _profileHash
@@ -75,7 +75,7 @@ contract SupplyChainUser is Ownable {
         emit UserUpdate(
             _userAddress,
             _name,
-            _contactNo,
+            _email,
             _role,
             _isActive,
             _profileHash
@@ -87,9 +87,10 @@ contract SupplyChainUser is Ownable {
 
     function getUser(address _userAddress)
         public
+        view
         returns (
             string memory name,
-            string memory contactNo,
+            string memory email,
             string memory role,
             bool isActive,
             string memory profileHash
@@ -97,9 +98,10 @@ contract SupplyChainUser is Ownable {
     {
         require(_userAddress != address(0));
 
-        (name, contactNo, role, isActive, profileHash) = supplyChainStorage
-            .getUser(_userAddress);
+        (name, email, role, isActive, profileHash) = supplyChainStorage.getUser(
+            _userAddress
+        );
 
-        return (name, contactNo, role, isActive, profileHash);
+        return (name, email, role, isActive, profileHash);
     }
 }

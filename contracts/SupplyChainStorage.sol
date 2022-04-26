@@ -5,8 +5,6 @@ pragma solidity ^0.8.9;
 import "./SupplyChainStorageOwnable.sol";
 
 contract SupplyChainStorage is SupplyChainStorageOwnable {
-    address public lastAccess;
-
     constructor() {
         authorizedCaller[msg.sender] = 1;
         emit AuthorizedCaller(msg.sender);
@@ -19,14 +17,13 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     event UserRoleUpdate(address userAddress);
 
     modifier onlyAuthCaller() {
-        lastAccess = msg.sender;
         require(authorizedCaller[msg.sender] == 1);
         _;
     }
 
     struct User {
         string name;
-        string contactNo;
+        string email;
         bool isActive;
         string profileHash;
     }
@@ -142,6 +139,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getUserRole(address _userAddress)
         public
+        view
         onlyAuthCaller
         returns (string memory)
     {
@@ -150,6 +148,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getNextAction(address _batchNo)
         public
+        view
         onlyAuthCaller
         returns (string memory)
     {
@@ -159,13 +158,13 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     function setUser(
         address _userAddress,
         string memory _name,
-        string memory _contactNo,
+        string memory _email,
         string memory _role,
         bool _isActive,
         string memory _profileHash
     ) public onlyAuthCaller returns (bool) {
         userData.name = _name;
-        userData.contactNo = _contactNo;
+        userData.email = _email;
         userData.isActive = _isActive;
         userData.profileHash = _profileHash;
 
@@ -179,10 +178,11 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getUser(address _userAddress)
         public
+        view
         onlyAuthCaller
         returns (
             string memory name,
-            string memory contactNo,
+            string memory email,
             string memory role,
             bool isActive,
             string memory profileHash
@@ -191,7 +191,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         User memory tmpData = userDetails[_userAddress];
         return (
             tmpData.name,
-            tmpData.contactNo,
+            tmpData.email,
             userRole[_userAddress],
             tmpData.isActive,
             tmpData.profileHash
@@ -223,6 +223,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getFarmDetails(address _batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory registrationNo,
@@ -262,6 +263,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getHarvestData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory coffeeFamily,
@@ -306,6 +308,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getProcessData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory procAddress,
@@ -346,6 +349,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getGrainData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (uint256 tasteScore, uint256 grainPrice)
     {
@@ -370,6 +374,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getAgglomData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory agglomAddress,
@@ -402,6 +407,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getShipPackerData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory transportTypeP,
@@ -436,6 +442,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getPackData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory packAddress,
@@ -470,6 +477,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getShipRetailerData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory transportTypeR,
@@ -510,6 +518,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function getRetailerData(address batchNo)
         public
+        view
         onlyAuthCaller
         returns (
             string memory arrivalDateW,
