@@ -23,7 +23,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     struct User {
         string name;
-        string contactNo;
+        string email;
         bool isActive;
         string profileHash;
     }
@@ -158,13 +158,13 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     function setUser(
         address _userAddress,
         string memory _name,
-        string memory _contactNo,
+        string memory _email,
         string memory _role,
         bool _isActive,
         string memory _profileHash
     ) public onlyAuthCaller returns (bool) {
         userData.name = _name;
-        userData.contactNo = _contactNo;
+        userData.email = _email;
         userData.isActive = _isActive;
         userData.profileHash = _profileHash;
 
@@ -182,7 +182,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         onlyAuthCaller
         returns (
             string memory name,
-            string memory contactNo,
+            string memory email,
             string memory role,
             bool isActive,
             string memory profileHash
@@ -191,7 +191,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         User memory tmpData = userDetails[_userAddress];
         return (
             tmpData.name,
-            tmpData.contactNo,
+            tmpData.email,
             userRole[_userAddress],
             tmpData.isActive,
             tmpData.profileHash

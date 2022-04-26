@@ -16,7 +16,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 	const retailer = accounts[8];
 
 	let _name = "Martha Granja";
-	let _contactNo = "0978456789";
+	let _email = "farmertest@gmail.com";
 	let _role = "FARMER";
 	let _isActive = true;
 	let _profileHash = "Sample Hash";
@@ -57,7 +57,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 	async function prepareFarmer(contract) {
 		_name = "Martha Granja";
-		_contactNo = "0978456789";
+		_email = "farmertest@gmail.com";
 		_role = "FARMER";
 		_isActive = true;
 		_profileHash = "Sample Hash";
@@ -65,7 +65,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		return contract.updateUserForAdmin(
 			farmer,
 			_name,
-			_contactNo,
+			_email,
 			_role,
 			_isActive,
 			_profileHash,
@@ -183,7 +183,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add process data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -191,7 +191,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -235,7 +235,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get harvest data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -243,7 +243,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -310,7 +310,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add grain data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -318,7 +318,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -326,7 +326,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -334,7 +334,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -388,7 +388,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get grain data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -396,7 +396,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -404,7 +404,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -412,7 +412,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -471,7 +471,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add agglomeration data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -479,7 +479,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -487,7 +487,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -495,7 +495,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -503,7 +503,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -511,7 +511,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -583,7 +583,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get agglomeration data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -591,7 +591,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -599,7 +599,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -607,7 +607,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -615,7 +615,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -623,7 +623,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -700,7 +700,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add shipping to packer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -708,7 +708,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -716,7 +716,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -724,7 +724,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -732,7 +732,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -740,7 +740,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -748,7 +748,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -756,7 +756,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -840,7 +840,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get shipping to packer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -848,7 +848,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -856,7 +856,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -864,7 +864,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -872,7 +872,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -880,7 +880,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -888,7 +888,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -896,7 +896,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -993,7 +993,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add packaging data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1001,7 +1001,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1009,7 +1009,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1017,7 +1017,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1025,7 +1025,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1033,7 +1033,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1041,7 +1041,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1049,7 +1049,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1057,7 +1057,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "packertest@gmail.com";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1065,7 +1065,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1158,7 +1158,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get packaging data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1166,7 +1166,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1174,7 +1174,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1182,7 +1182,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1190,7 +1190,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1198,7 +1198,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1206,7 +1206,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1214,7 +1214,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1222,7 +1222,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "packertest@gmail.com";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1230,7 +1230,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1334,7 +1334,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add shipping to retailer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1342,7 +1342,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1350,7 +1350,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1358,7 +1358,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1366,7 +1366,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1374,7 +1374,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1382,7 +1382,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1390,7 +1390,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1398,7 +1398,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "packertest@gmail.com";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1406,7 +1406,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1414,7 +1414,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ricardo Moreno";
-			_contactNo = "0934568231";
+			_email = "sretailertest@gmail.com";
 			_role = "SHIPPER_RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1422,7 +1422,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperRetailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1532,7 +1532,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get shipping to retailer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1540,7 +1540,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1548,7 +1548,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1556,7 +1556,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1564,7 +1564,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1572,7 +1572,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1580,7 +1580,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1588,7 +1588,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1596,7 +1596,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "packertest@gmail.com";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1604,7 +1604,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1612,7 +1612,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ricardo Moreno";
-			_contactNo = "0934568231";
+			_email = "sretailertest@gmail.com";
 			_role = "SHIPPER_RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1620,7 +1620,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperRetailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1743,7 +1743,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should add retailer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1751,7 +1751,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1759,7 +1759,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1767,7 +1767,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1775,7 +1775,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "agglomeratortest@gmail.com";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1783,7 +1783,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1791,7 +1791,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "spackertest@gmail.com";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1799,7 +1799,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1807,7 +1807,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "packertest@gmail.com";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1815,7 +1815,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1823,7 +1823,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ricardo Moreno";
-			_contactNo = "0934568231";
+			_email = "sretailertest@gmail.com";
 			_role = "SHIPPER_RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1831,7 +1831,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperRetailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1839,7 +1839,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Sandra Sandoval";
-			_contactNo = "0979065456";
+			_email = "retailertest@gmail.com";
 			_role = "RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1847,7 +1847,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				retailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1973,7 +1973,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 		it("should get retailer data", async () => {
 			_name = "Santiago Endara";
-			_contactNo = "0978065745";
+			_email = "processortest@gmail.com";
 			_role = "PROCESSOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1981,7 +1981,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				processor,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -1989,7 +1989,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ernesto Villacis";
-			_contactNo = "0956034567";
+			_email = "ginspectortest@gmail.com";
 			_role = "GRAIN_INSPECTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -1997,7 +1997,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				grainInspector,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -2005,7 +2005,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Carmen Buitron";
-			_contactNo = "0967854734";
+			_email = "0967854734";
 			_role = "AGGLOMERATOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -2013,7 +2013,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				agglomerator,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -2021,7 +2021,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Manuel Utreras";
-			_contactNo = "0934765345";
+			_email = "0934765345";
 			_role = "SHIPPER_PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -2029,7 +2029,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperPacker,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -2037,7 +2037,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Pamela Feder";
-			_contactNo = "0956876456";
+			_email = "0956876456";
 			_role = "PACKER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -2045,7 +2045,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				packer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -2053,7 +2053,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Ricardo Moreno";
-			_contactNo = "0934568231";
+			_email = "0934568231";
 			_role = "SHIPPER_RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -2061,7 +2061,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				shipperRetailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
@@ -2069,7 +2069,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			_name = "Sandra Sandoval";
-			_contactNo = "0979065456";
+			_email = "0979065456";
 			_role = "RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
@@ -2077,7 +2077,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.supplyChainUser.updateUserForAdmin(
 				retailer,
 				_name,
-				_contactNo,
+				_email,
 				_role,
 				_isActive,
 				_profileHash,
