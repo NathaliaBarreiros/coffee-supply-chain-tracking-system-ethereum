@@ -38,6 +38,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getNextAction(address _batchNo)
         public
+        view
         returns (string memory action)
     {
         (action) = supplyChainStorage.getNextAction(_batchNo);
@@ -46,6 +47,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getFarmDetails(address _batchNo)
         public
+        view
         returns (
             string memory registrationNo,
             string memory farmName,
@@ -106,6 +108,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getHarvestData(address _batchNo)
         public
+        view
         returns (
             string memory coffeeFamily,
             string memory typeOfSeed,
@@ -153,6 +156,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getProcessData(address _batchNo)
         public
+        view
         returns (
             string memory procAddress,
             string memory typeOfDrying,
@@ -205,6 +209,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getGrainData(address _batchNo)
         public
+        view
         returns (uint256 tasteScore, uint256 grainPrice)
     {
         (tasteScore, grainPrice) = supplyChainStorage.getGrainData(_batchNo);
@@ -232,6 +237,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getAgglomData(address _batchNo)
         public
+        view
         returns (
             string memory agglomAddress,
             string memory agglomDate,
@@ -264,6 +270,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getShipPackerData(address _batchNo)
         public
+        view
         returns (
             string memory transportTypeP,
             string memory pickupDateP,
@@ -298,6 +305,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getPackData(address _batchNo)
         public
+        view
         returns (
             string memory packAddress,
             string memory arrivalDateP,
@@ -331,6 +339,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getShipRetailerData(address _batchNo)
         public
+        view
         returns (
             string memory transportTypeR,
             string memory pickupDateR,
@@ -371,6 +380,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function getRetailerData(address _batchNo)
         public
+        view
         returns (
             string memory arrivalDateW,
             string memory arrivalDateSP,
