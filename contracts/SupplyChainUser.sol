@@ -25,17 +25,22 @@ contract SupplyChainUser is Ownable {
     function updateUser(
         string memory _name,
         string memory _email,
-        string memory _role,
+        // string memory _role,
         bool _isActive,
         string memory _profileHash
     ) public returns (bool) {
         require(msg.sender != address(0));
 
+        (, , string memory lastRole, , ) = supplyChainStorage.getUser(
+            msg.sender
+        );
+
         bool status = supplyChainStorage.setUser(
             msg.sender,
             _name,
             _email,
-            _role,
+            lastRole,
+            // _role,
             _isActive,
             _profileHash
         );
@@ -44,11 +49,12 @@ contract SupplyChainUser is Ownable {
             msg.sender,
             _name,
             _email,
-            _role,
+            lastRole,
+            // _role,
             _isActive,
             _profileHash
         );
-        emit UserRoleUpdate(msg.sender, _role);
+        emit UserRoleUpdate(msg.sender, lastRole);
 
         return status;
     }
