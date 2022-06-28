@@ -92,7 +92,7 @@ contract CoffeeSupplyChain is Ownable {
         string memory _typeOfSeed,
         string memory _fertilizerUsed,
         string memory _harvestDate
-    ) public isValidPerformer(_batchNo, "FARMER") returns (bool) {
+    ) public isValidPerformer(_batchNo, "AGRICULTOR/PRODUCTOR") returns (bool) {
         bool status = supplyChainStorage.setHarvestData(
             _batchNo,
             _coffeeFamily,
@@ -136,7 +136,7 @@ contract CoffeeSupplyChain is Ownable {
         string memory _roastDate,
         string memory _millDate,
         uint256 _processorPrice
-    ) public isValidPerformer(_batchNo, "PROCESSOR") returns (bool) {
+    ) public isValidPerformer(_batchNo, "PROCESADOR") returns (bool) {
         bool status = supplyChainStorage.setProcessData(
             _batchNo,
             _procAddress,
@@ -195,7 +195,11 @@ contract CoffeeSupplyChain is Ownable {
         address _batchNo,
         uint256 _tasteScore,
         uint256 _grainPrice
-    ) public isValidPerformer(_batchNo, "GRAIN_INSPECTOR") returns (bool) {
+    )
+        public
+        isValidPerformer(_batchNo, "INSPECTOR DE GRANO/AGRICULTOR")
+        returns (bool)
+    {
         bool status = supplyChainStorage.setGrainData(
             _batchNo,
             _tasteScore,
@@ -222,7 +226,7 @@ contract CoffeeSupplyChain is Ownable {
         string memory _agglomAddress,
         string memory _agglomDate,
         uint256 _storagePrice
-    ) public isValidPerformer(_batchNo, "AGGLOMERATOR") returns (bool) {
+    ) public isValidPerformer(_batchNo, "AGLOMERADOR") returns (bool) {
         bool status = supplyChainStorage.setAgglomData(
             _batchNo,
             _agglomAddress,
@@ -255,7 +259,11 @@ contract CoffeeSupplyChain is Ownable {
         string memory _transportTypeP,
         string memory _pickupDateP,
         uint256 _shipPriceP
-    ) public isValidPerformer(_batchNo, "SHIPPER_PACKER") returns (bool) {
+    )
+        public
+        isValidPerformer(_batchNo, "TRANSPORTISTA A EMPACADORA")
+        returns (bool)
+    {
         bool status = supplyChainStorage.setShipPackerData(
             _batchNo,
             _transportTypeP,
@@ -289,7 +297,7 @@ contract CoffeeSupplyChain is Ownable {
         string memory _arrivalDateP,
         string memory _packDate,
         uint256 _packPrice
-    ) public isValidPerformer(_batchNo, "PACKER") returns (bool) {
+    ) public isValidPerformer(_batchNo, "EMPACADORA") returns (bool) {
         bool status = supplyChainStorage.setPackData(
             _batchNo,
             _packAddress,
@@ -324,7 +332,11 @@ contract CoffeeSupplyChain is Ownable {
         string memory _transportTypeR,
         string memory _pickupDateR,
         uint256 _shipPriceR
-    ) public isValidPerformer(_batchNo, "SHIPPER_RETAILER") returns (bool) {
+    )
+        public
+        isValidPerformer(_batchNo, "TRANSPORTISTA A RETAILER")
+        returns (bool)
+    {
         bool status = supplyChainStorage.setShipRetailerData(
             _batchNo,
             _transportTypeR,

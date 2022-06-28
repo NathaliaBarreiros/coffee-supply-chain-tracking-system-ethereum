@@ -217,7 +217,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         farmDetailsData.farmAddress = _farmAddress;
 
         batchFarmDetails[batchNo] = farmDetailsData;
-        nextAction[batchNo] = "FARMER";
+        nextAction[batchNo] = "AGRICULTOR/PRODUCTOR";
         return batchNo;
     }
 
@@ -257,7 +257,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         harvestData.harvestDate = _harvestDate;
 
         batchHarvest[batchNo] = harvestData;
-        nextAction[batchNo] = "PROCESSOR";
+        nextAction[batchNo] = "PROCESADOR";
         return true;
     }
 
@@ -302,7 +302,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         processData.processorPrice = _processorPrice;
 
         batchProcess[batchNo] = processData;
-        nextAction[batchNo] = "GRAIN_INSPECTOR";
+        nextAction[batchNo] = "INSPECTOR DE GRANO/AGRICULTOR";
         return true;
     }
 
@@ -343,7 +343,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         grainData.grainPrice = _grainPrice;
 
         batchGrain[batchNo] = grainData;
-        nextAction[batchNo] = "AGGLOMERATOR";
+        nextAction[batchNo] = "AGLOMERADOR";
         return true;
     }
 
@@ -368,7 +368,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         agglomData.storagePrice = _storagePrice;
 
         batchAgglomerate[batchNo] = agglomData;
-        nextAction[batchNo] = "SHIPPER_PACKER";
+        nextAction[batchNo] = "TRANSPORTISTA A EMPACADORA";
         return true;
     }
 
@@ -401,7 +401,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         shipPackerData.shipPriceP = _shipPriceP;
 
         batchShipToPacker[batchNo] = shipPackerData;
-        nextAction[batchNo] = "PACKER";
+        nextAction[batchNo] = "EMPACADORA";
         return true;
     }
 
@@ -436,7 +436,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         packData.packPrice = _packPrice;
 
         batchPack[batchNo] = packData;
-        nextAction[batchNo] = "SHIPPER_RETAILER";
+        nextAction[batchNo] = "TRANSPORTISTA A RETAILER";
         return true;
     }
 

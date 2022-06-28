@@ -3,7 +3,7 @@ const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 
 const _name = "John Quevedo";
 const _email = "farmertest@gmail.com";
-const _role = "FARMER";
+const _role = "AGRICULTOR/PRODUCTOR";
 const _isActive = true;
 const _profileHash = "Qmadp4L61MaQQX5NFfjqaihnY8r7PmogqZL6wvX1HqwL";
 

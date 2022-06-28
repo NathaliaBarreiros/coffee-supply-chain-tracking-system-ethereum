@@ -17,7 +17,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 	let _name = "Martha Granja";
 	let _email = "farmertest@gmail.com";
-	let _role = "FARMER";
+	let _role = "AGRICULTOR/PRODUCTOR";
 	let _isActive = true;
 	let _profileHash = "Sample Hash";
 
@@ -58,7 +58,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 	async function prepareFarmer(contract) {
 		_name = "Martha Granja";
 		_email = "farmertest@gmail.com";
-		_role = "FARMER";
+		_role = "AGRICULTOR/PRODUCTOR";
 		_isActive = true;
 		_profileHash = "Sample Hash";
 
@@ -184,7 +184,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add process data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -236,7 +236,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get harvest data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -311,7 +311,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add grain data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -327,7 +327,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -389,7 +389,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get grain data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -405,7 +405,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -472,7 +472,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add agglomeration data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -488,7 +488,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -504,7 +504,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -584,7 +584,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get agglomeration data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -600,7 +600,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -616,7 +616,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -701,7 +701,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add shipping to packer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -717,7 +717,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -733,7 +733,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -749,7 +749,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -841,7 +841,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get shipping to packer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -857,7 +857,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -873,7 +873,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -889,7 +889,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -994,7 +994,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add packaging data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1010,7 +1010,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1026,7 +1026,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1042,7 +1042,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1058,7 +1058,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "packertest@gmail.com";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1159,7 +1159,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get packaging data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1175,7 +1175,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1191,7 +1191,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1207,7 +1207,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1223,7 +1223,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "packertest@gmail.com";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1335,7 +1335,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add shipping to retailer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1351,7 +1351,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1367,7 +1367,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1383,7 +1383,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1399,7 +1399,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "packertest@gmail.com";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1415,7 +1415,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ricardo Moreno";
 			_email = "sretailertest@gmail.com";
-			_role = "SHIPPER_RETAILER";
+			_role = "TRANSPORTISTA A RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1533,7 +1533,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get shipping to retailer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1549,7 +1549,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1565,7 +1565,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1581,7 +1581,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1597,7 +1597,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "packertest@gmail.com";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1613,7 +1613,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ricardo Moreno";
 			_email = "sretailertest@gmail.com";
-			_role = "SHIPPER_RETAILER";
+			_role = "TRANSPORTISTA A RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1744,7 +1744,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should add retailer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1760,7 +1760,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1776,7 +1776,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "agglomeratortest@gmail.com";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1792,7 +1792,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "spackertest@gmail.com";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1808,7 +1808,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "packertest@gmail.com";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1824,7 +1824,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ricardo Moreno";
 			_email = "sretailertest@gmail.com";
-			_role = "SHIPPER_RETAILER";
+			_role = "TRANSPORTISTA A RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1974,7 +1974,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		it("should get retailer data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
-			_role = "PROCESSOR";
+			_role = "PROCESADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -1990,7 +1990,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ernesto Villacis";
 			_email = "ginspectortest@gmail.com";
-			_role = "GRAIN_INSPECTOR";
+			_role = "INSPECTOR DE GRANO/AGRICULTOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -2006,7 +2006,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Carmen Buitron";
 			_email = "0967854734";
-			_role = "AGGLOMERATOR";
+			_role = "AGLOMERADOR";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -2022,7 +2022,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Manuel Utreras";
 			_email = "0934765345";
-			_role = "SHIPPER_PACKER";
+			_role = "TRANSPORTISTA A EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -2038,7 +2038,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Pamela Feder";
 			_email = "0956876456";
-			_role = "PACKER";
+			_role = "EMPACADORA";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
@@ -2054,7 +2054,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			_name = "Ricardo Moreno";
 			_email = "0934568231";
-			_role = "SHIPPER_RETAILER";
+			_role = "TRANSPORTISTA A RETAILER";
 			_isActive = true;
 			_profileHash = "Sample Hash";
 
