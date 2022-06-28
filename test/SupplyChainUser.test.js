@@ -37,13 +37,13 @@ contract("SupplyChainUser", function (accounts) {
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
 
 		checkUserDataUser(user, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 	});
 
@@ -59,13 +59,13 @@ contract("SupplyChainUser", function (accounts) {
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
 
 		checkUserData(user, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 	});
 
@@ -81,13 +81,13 @@ contract("SupplyChainUser", function (accounts) {
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
 
 		checkUserData(user, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 	});
 });

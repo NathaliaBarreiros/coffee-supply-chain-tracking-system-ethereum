@@ -116,7 +116,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			assert.exists(event, "SetFarmDetails event does not exists");
 
 			batchNo = event.args.batchNo;
-			console.log(batchNo);
+			// console.log(batchNo);
 		});
 
 		it("should get farm details", async () => {
