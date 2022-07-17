@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.15;
 
 import "./SupplyChainStorageOwnable.sol";
 
@@ -29,7 +29,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     }
 
     mapping(address => User) userDetails;
-    mapping(address => string) userRole;
+    mapping(address => string[]) userRole;
 
     mapping(address => uint8) authorizedCaller;
 
@@ -58,90 +58,54 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     }
 
     struct Harvest {
-        string coffeeFamily;
+        string seedSupplier;
         string typeOfSeed;
+        string coffeeFamily;
         string fertilizerUsed;
         string harvestDate;
+        string humidityPercentage;
+        string batchWeight;
     }
 
     struct Process {
-        string procAddress;
+        string processorAddress;
         string typeOfDrying;
+        string humidityAfterDrying;
         string roastImageHash;
-        string roastTemp;
-        string typeOfRoast;
-        string roastDate;
-        string millDate;
-        uint256 processorPrice;
+        string[] tempTypeRoast;
+        string[] roastMillDates;
+        string processorPricePerKilo;
+        string processBatchWeight;
     }
 
-    struct Grain {
-        uint256 tasteScore;
-        uint256 grainPrice;
+    struct Taste {
+        string tastingScore;
+        string tastingServicePrice;
     }
 
-    struct Agglomerate {
-        string agglomAddress;
-        string agglomDate;
-        uint256 storagePrice;
-    }
-
-    struct ShipToPacker {
-        string transportTypeP;
-        string pickupDateP;
-        uint256 shipPriceP;
-    }
-
-    struct Pack {
-        string packAddress;
-        string arrivalDateP;
-        string packDate;
-        uint256 packPrice;
-    }
-
-    struct ShipToRetailer {
-        string transportTypeR;
-        string pickupDateR;
-        uint256 shipPriceR;
-    }
-
-    struct Retailer {
-        string arrivalDateW;
-        string arrivalDateSP;
-        string warehouseName;
-        string warehouseAddress;
-        string salePointAddress;
-        uint256 shipPriceSP;
-        uint256 productPrice;
+    struct CoffeeSell {
+        string beanPricePerKilo;
     }
 
     mapping(address => FarmDetails) batchFarmDetails;
     mapping(address => Harvest) batchHarvest;
     mapping(address => Process) batchProcess;
-    mapping(address => Grain) batchGrain;
-    mapping(address => Agglomerate) batchAgglomerate;
-    mapping(address => ShipToPacker) batchShipToPacker;
-    mapping(address => Pack) batchPack;
-    mapping(address => ShipToRetailer) batchShipToRetailer;
-    mapping(address => Retailer) batchRetailer;
+    mapping(address => Taste) batchTaste;
+    mapping(address => CoffeeSell) batchCoffeSell;
     mapping(address => string) nextAction;
 
     User userData;
     FarmDetails farmDetailsData;
     Harvest harvestData;
     Process processData;
-    Grain grainData;
-    Agglomerate agglomData;
-    ShipToPacker shipPackerData;
-    Pack packData;
-    ShipToRetailer shipRetailerData;
-    Retailer retailerData;
+    Taste tasteData;
+    CoffeeSell coffeeSellData;
 
-    function getUserRole(address _userAddress)
+    function getUserRoles(address _userAddress)
         public
         view
         onlyAuthCaller
-        returns (string memory)
+        returns (string[] memory)
     {
         return userRole[_userAddress];
     }
@@ -155,11 +119,21 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         return nextAction[_batchNo];
     }
 
+    function writeNextAction(address _batchNo, string memory action)
+        public
+        onlyAuthCaller
+        returns (bool)
+    {
+        nextAction[_batchNo] = action;
+
+        return true;
+    }
+
     function setUser(
         address _userAddress,
         string memory _name,
         string memory _email,
-        string memory _role,
+        string[] memory _role,
         bool _isActive,
         string memory _profileHash
     ) public onlyAuthCaller returns (bool) {
@@ -183,7 +157,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         returns (
             string memory name,
             string memory email,
-            string memory role,
+            string[] memory role,
             bool isActive,
             string memory profileHash
         )
@@ -217,7 +191,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         farmDetailsData.farmAddress = _farmAddress;
 
         batchFarmDetails[batchNo] = farmDetailsData;
-        nextAction[batchNo] = "AGRICULTOR/PRODUCTOR";
+        nextAction[batchNo] = "FARMER";
         return batchNo;
     }
 
@@ -246,18 +220,24 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function setHarvestData(
         address batchNo,
-        string memory _coffeeFamily,
+        string memory _seedSupplier,
         string memory _typeOfSeed,
+        string memory _coffeeFamily,
         string memory _fertilizerUsed,
-        string memory _harvestDate
+        string memory _harvestDate,
+        string memory _humidityPercentage,
+        string memory _batchWeight
     ) public onlyAuthCaller returns (bool) {
-        harvestData.coffeeFamily = _coffeeFamily;
+        harvestData.seedSupplier = _seedSupplier;
         harvestData.typeOfSeed = _typeOfSeed;
+        harvestData.coffeeFamily = _coffeeFamily;
         harvestData.fertilizerUsed = _fertilizerUsed;
         harvestData.harvestDate = _harvestDate;
+        harvestData.humidityPercentage = _humidityPercentage;
+        harvestData.batchWeight = _batchWeight;
 
         batchHarvest[batchNo] = harvestData;
-        nextAction[batchNo] = "PROCESADOR";
+        nextAction[batchNo] = "PROCESSOR";
         return true;
     }
 
@@ -266,44 +246,51 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         view
         onlyAuthCaller
         returns (
-            string memory coffeeFamily,
+            string memory seedSupplier,
             string memory typeOfSeed,
+            string memory coffeeFamily,
             string memory fertilizerUsed,
-            string memory harvestDate
+            string memory harvestDate,
+            string memory humidityPercentage,
+            string memory batchWeight
         )
     {
         Harvest memory tmpData = batchHarvest[batchNo];
         return (
-            tmpData.coffeeFamily,
+            tmpData.seedSupplier,
             tmpData.typeOfSeed,
+            tmpData.coffeeFamily,
             tmpData.fertilizerUsed,
-            tmpData.harvestDate
+            tmpData.harvestDate,
+            tmpData.humidityPercentage,
+            tmpData.batchWeight
         );
     }
 
     function setProcessData(
         address batchNo,
-        string memory _procAddress,
+        string memory _processorAddress,
         string memory _typeOfDrying,
+        string memory _humidityAfterDrying,
         string memory _roastImageHash,
-        string memory _roastTemp,
-        string memory _typeOfRoast,
-        string memory _roastDate,
-        string memory _millDate,
-        uint256 _processorPrice
+        string[] memory _tempTypeRoast,
+        string[] memory _roastMillDates,
+        string memory _processorPricePerKilo,
+        string memory _processBatchWeight
     ) public onlyAuthCaller returns (bool) {
-        processData.procAddress = _procAddress;
+        processData.processorAddress = _processorAddress;
         processData.typeOfDrying = _typeOfDrying;
+        processData.humidityAfterDrying = _humidityAfterDrying;
         processData.roastImageHash = _roastImageHash;
-        processData.roastTemp = _roastTemp;
-        processData.typeOfRoast = _typeOfRoast;
-        processData.roastDate = _roastDate;
-        processData.millDate = _millDate;
-        processData.processorPrice = _processorPrice;
+        processData.tempTypeRoast = _tempTypeRoast;
+        processData.roastMillDates = _roastMillDates;
+        processData.processorPricePerKilo = _processorPricePerKilo;
+        processData.processBatchWeight = _processBatchWeight;
 
         batchProcess[batchNo] = processData;
-        nextAction[batchNo] = "INSPECTOR DE GRANO/AGRICULTOR";
-        return true;
+
+        nextAction[batchNo] = "TASTER";
+        return (true);
     }
 
     function getProcessData(address batchNo)
@@ -311,234 +298,71 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         view
         onlyAuthCaller
         returns (
-            string memory procAddress,
+            string memory processorAddress,
             string memory typeOfDrying,
+            string memory humidityAfterDrying,
             string memory roastImageHash,
-            string memory roastTemp,
-            string memory typeOfRoast,
-            string memory roastDate,
-            string memory millDate,
-            uint256 processorPrice
+            string[] memory tempTypeRoast,
+            string[] memory roastMillDates,
+            string memory processorPricePerKilo,
+            string memory processBatchWeight
         )
     {
         Process memory tmpData = batchProcess[batchNo];
         return (
-            tmpData.procAddress,
+            tmpData.processorAddress,
             tmpData.typeOfDrying,
+            tmpData.humidityAfterDrying,
             tmpData.roastImageHash,
-            tmpData.roastTemp,
-            tmpData.typeOfRoast,
-            tmpData.roastDate,
-            tmpData.millDate,
-            tmpData.processorPrice
+            tmpData.tempTypeRoast,
+            tmpData.roastMillDates,
+            tmpData.processorPricePerKilo,
+            tmpData.processBatchWeight
         );
     }
 
-    function setGrainData(
+    function setTasteData(
         address batchNo,
-        uint256 _tasteScore,
-        uint256 _grainPrice
+        string memory _tastingScore,
+        string memory _tastingServicePrice
     ) public onlyAuthCaller returns (bool) {
-        grainData.tasteScore = _tasteScore;
-        grainData.grainPrice = _grainPrice;
+        tasteData.tastingScore = _tastingScore;
+        tasteData.tastingServicePrice = _tastingServicePrice;
 
-        batchGrain[batchNo] = grainData;
-        nextAction[batchNo] = "AGLOMERADOR";
+        batchTaste[batchNo] = tasteData;
+        nextAction[batchNo] = "SELLER";
         return true;
     }
 
-    function getGrainData(address batchNo)
+    function getTasteData(address batchNo)
         public
         view
         onlyAuthCaller
-        returns (uint256 tasteScore, uint256 grainPrice)
+        returns (string memory tastingScore, string memory tastingServicePrice)
     {
-        Grain memory tmpData = batchGrain[batchNo];
-        return (tmpData.tasteScore, tmpData.grainPrice);
+        Taste memory tmpData = batchTaste[batchNo];
+        return (tmpData.tastingScore, tmpData.tastingServicePrice);
     }
 
-    function setAgglomData(
-        address batchNo,
-        string memory _agglomAddress,
-        string memory _agglomDate,
-        uint256 _storagePrice
-    ) public onlyAuthCaller returns (bool) {
-        agglomData.agglomAddress = _agglomAddress;
-        agglomData.agglomDate = _agglomDate;
-        agglomData.storagePrice = _storagePrice;
+    function setCoffeeSellData(address batchNo, string memory _beanPricePerKilo)
+        public
+        onlyAuthCaller
+        returns (bool)
+    {
+        coffeeSellData.beanPricePerKilo = _beanPricePerKilo;
 
-        batchAgglomerate[batchNo] = agglomData;
-        nextAction[batchNo] = "TRANSPORTISTA A EMPACADORA";
+        batchCoffeSell[batchNo] = coffeeSellData;
+        nextAction[batchNo] = "WAREHOUSE";
         return true;
     }
 
-    function getAgglomData(address batchNo)
+    function getCoffeeSellData(address batchNo)
         public
         view
         onlyAuthCaller
-        returns (
-            string memory agglomAddress,
-            string memory agglomDate,
-            uint256 storagePrice
-        )
+        returns (string memory beanPricePerKilo)
     {
-        Agglomerate memory tmpData = batchAgglomerate[batchNo];
-        return (
-            tmpData.agglomAddress,
-            tmpData.agglomDate,
-            tmpData.storagePrice
-        );
-    }
-
-    function setShipPackerData(
-        address batchNo,
-        string memory _transportTypeP,
-        string memory _pickupDateP,
-        uint256 _shipPriceP
-    ) public onlyAuthCaller returns (bool) {
-        shipPackerData.transportTypeP = _transportTypeP;
-        shipPackerData.pickupDateP = _pickupDateP;
-        shipPackerData.shipPriceP = _shipPriceP;
-
-        batchShipToPacker[batchNo] = shipPackerData;
-        nextAction[batchNo] = "EMPACADORA";
-        return true;
-    }
-
-    function getShipPackerData(address batchNo)
-        public
-        view
-        onlyAuthCaller
-        returns (
-            string memory transportTypeP,
-            string memory pickupDateP,
-            uint256 shipPriceP
-        )
-    {
-        ShipToPacker memory tmpData = batchShipToPacker[batchNo];
-        return (
-            tmpData.transportTypeP,
-            tmpData.pickupDateP,
-            tmpData.shipPriceP
-        );
-    }
-
-    function setPackData(
-        address batchNo,
-        string memory _packAddress,
-        string memory _arrivalDateP,
-        string memory _packDate,
-        uint256 _packPrice
-    ) public onlyAuthCaller returns (bool) {
-        packData.packAddress = _packAddress;
-        packData.arrivalDateP = _arrivalDateP;
-        packData.packDate = _packDate;
-        packData.packPrice = _packPrice;
-
-        batchPack[batchNo] = packData;
-        nextAction[batchNo] = "TRANSPORTISTA A RETAILER";
-        return true;
-    }
-
-    function getPackData(address batchNo)
-        public
-        view
-        onlyAuthCaller
-        returns (
-            string memory packAddress,
-            string memory arrivalDateP,
-            string memory packDate,
-            uint256 packPrice
-        )
-    {
-        Pack memory tmpData = batchPack[batchNo];
-        return (
-            tmpData.packAddress,
-            tmpData.arrivalDateP,
-            tmpData.packDate,
-            tmpData.packPrice
-        );
-    }
-
-    function setShipRetailerData(
-        address batchNo,
-        string memory _transportTypeR,
-        string memory _pickupDateR,
-        uint256 _shipPriceR
-    ) public onlyAuthCaller returns (bool) {
-        shipRetailerData.transportTypeR = _transportTypeR;
-        shipRetailerData.pickupDateR = _pickupDateR;
-        shipRetailerData.shipPriceR = _shipPriceR;
-
-        batchShipToRetailer[batchNo] = shipRetailerData;
-        nextAction[batchNo] = "RETAILER";
-        return true;
-    }
-
-    function getShipRetailerData(address batchNo)
-        public
-        view
-        onlyAuthCaller
-        returns (
-            string memory transportTypeR,
-            string memory pickupDateR,
-            uint256 shipPriceR
-        )
-    {
-        ShipToRetailer memory tmpData = batchShipToRetailer[batchNo];
-        return (
-            tmpData.transportTypeR,
-            tmpData.pickupDateR,
-            tmpData.shipPriceR
-        );
-    }
-
-    function setRetailerData(
-        address batchNo,
-        string memory _arrivalDateW,
-        string memory _arrivalDateSP,
-        string memory _warehouseName,
-        string memory _warehouseAddress,
-        string memory _salePointAddress,
-        uint256 _shipPriceSP,
-        uint256 _productPrice
-    ) public onlyAuthCaller returns (bool) {
-        retailerData.arrivalDateW = _arrivalDateW;
-        retailerData.arrivalDateSP = _arrivalDateSP;
-        retailerData.warehouseName = _warehouseName;
-        retailerData.warehouseAddress = _warehouseAddress;
-        retailerData.salePointAddress = _salePointAddress;
-        retailerData.shipPriceSP = _shipPriceSP;
-        retailerData.productPrice = _productPrice;
-
-        batchRetailer[batchNo] = retailerData;
-        nextAction[batchNo] = "DONE";
-        return true;
-    }
-
-    function getRetailerData(address batchNo)
-        public
-        view
-        onlyAuthCaller
-        returns (
-            string memory arrivalDateW,
-            string memory arrivalDateSP,
-            string memory warehouseName,
-            string memory warehouseAddress,
-            string memory salePointAddress,
-            uint256 shipPriceSP,
-            uint256 productPrice
-        )
-    {
-        Retailer memory tmpData = batchRetailer[batchNo];
-        return (
-            tmpData.arrivalDateW,
-            tmpData.arrivalDateSP,
-            tmpData.warehouseName,
-            tmpData.warehouseAddress,
-            tmpData.salePointAddress,
-            tmpData.shipPriceSP,
-            tmpData.productPrice
-        );
+        CoffeeSell memory tmpData = batchCoffeSell[batchNo];
+        return (tmpData.beanPricePerKilo);
     }
 }

@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.15;
 
 import "./SupplyChainStorage.sol";
 import "./Ownable.sol";
@@ -9,24 +9,38 @@ contract CoffeeSupplyChain is Ownable {
     event SetFarmDetails(address indexed user, address indexed batchNo);
     event DoneHarvesting(address indexed user, address indexed batchNo);
     event DoneProcessing(address indexed user, address indexed batchNo);
-    event SetGrainData(address indexed user, address indexed batchNo);
-    event DoneAgglomeration(address indexed user, address indexed batchNo);
-    event DoneShippingPacker(address indexed user, address indexed batchNo);
-    event DonePackaging(address indexed user, address indexed batchNo);
-    event DoneShippingRetailer(address indexed user, address indexed batchNo);
-    event DoneRetailer(address indexed user, address indexed batchNo);
+    event DoneTasting(address indexed user, address indexed batchNo);
+    event DoneCoffeeSelling(address indexed user, address indexed batchNo);
 
     modifier isValidPerformer(address batchNo, string memory role) {
         require(
             keccak256(
-                abi.encodePacked(supplyChainStorage.getUserRole(msg.sender))
-            ) == keccak256(abi.encodePacked(role))
-        );
-        require(
-            keccak256(
                 abi.encodePacked(supplyChainStorage.getNextAction(batchNo))
-            ) == keccak256(abi.encodePacked(role))
+            ) == keccak256(abi.encodePacked(role)),
+            "NEXT ACTION AND ROLE DO NOT MATCH!"
         );
+
+        bool status = false;
+
+        for (
+            uint256 i = 0;
+            i < supplyChainStorage.getUserRoles(msg.sender).length;
+            i++
+        ) {
+            status =
+                status ||
+                keccak256(
+                    abi.encodePacked(
+                        supplyChainStorage.getUserRoles(msg.sender)[i]
+                    )
+                ) ==
+                keccak256(abi.encodePacked(role));
+        }
+
+        if (!status) {
+            require(status, "THERE IS NO ROLE MATCHING!");
+        }
+
         _;
     }
 
@@ -88,17 +102,23 @@ contract CoffeeSupplyChain is Ownable {
 
     function addHarvestData(
         address _batchNo,
-        string memory _coffeeFamily,
+        string memory _seedSupplier,
         string memory _typeOfSeed,
+        string memory _coffeeFamily,
         string memory _fertilizerUsed,
-        string memory _harvestDate
-    ) public isValidPerformer(_batchNo, "AGRICULTOR/PRODUCTOR") returns (bool) {
+        string memory _harvestDate,
+        string memory _humidityPercentage,
+        string memory _batchWeight
+    ) public isValidPerformer(_batchNo, "FARMER") returns (bool) {
         bool status = supplyChainStorage.setHarvestData(
             _batchNo,
-            _coffeeFamily,
+            _seedSupplier,
             _typeOfSeed,
+            _coffeeFamily,
             _fertilizerUsed,
-            _harvestDate
+            _harvestDate,
+            _humidityPercentage,
+            _batchWeight
         );
 
         emit DoneHarvesting(msg.sender, _batchNo);
@@ -110,43 +130,57 @@ contract CoffeeSupplyChain is Ownable {
         public
         view
         returns (
-            string memory coffeeFamily,
+            string memory seedSupplier,
             string memory typeOfSeed,
+            string memory coffeeFamily,
             string memory fertilizerUsed,
-            string memory harvestDate
+            string memory harvestDate,
+            string memory humidityPercentage,
+            string memory batchWeight
         )
     {
         (
-            coffeeFamily,
+            seedSupplier,
             typeOfSeed,
+            coffeeFamily,
             fertilizerUsed,
-            harvestDate
+            harvestDate,
+            humidityPercentage,
+            batchWeight
         ) = supplyChainStorage.getHarvestData(_batchNo);
 
-        return (coffeeFamily, typeOfSeed, fertilizerUsed, harvestDate);
+        return (
+            seedSupplier,
+            typeOfSeed,
+            coffeeFamily,
+            fertilizerUsed,
+            harvestDate,
+            humidityPercentage,
+            batchWeight
+        );
     }
 
     function addProcessData(
         address _batchNo,
-        string memory _procAddress,
+        string memory _processorAddress,
         string memory _typeOfDrying,
+        string memory _humidityAfterDrying,
         string memory _roastImageHash,
-        string memory _roastTemp,
-        string memory _typeOfRoast,
-        string memory _roastDate,
-        string memory _millDate,
-        uint256 _processorPrice
-    ) public isValidPerformer(_batchNo, "PROCESADOR") returns (bool) {
+        string[] memory _tempTypeRoast,
+        string[] memory _roastMillDates,
+        string memory _processorPricePerKilo,
+        string memory _processBatchWeight
+    ) public isValidPerformer(_batchNo, "PROCESSOR") returns (bool) {
         bool status = supplyChainStorage.setProcessData(
             _batchNo,
-            _procAddress,
+            _processorAddress,
             _typeOfDrying,
+            _humidityAfterDrying,
             _roastImageHash,
-            _roastTemp,
-            _typeOfRoast,
-            _roastDate,
-            _millDate,
-            _processorPrice
+            _tempTypeRoast,
+            _roastMillDates,
+            _processorPricePerKilo,
+            _processBatchWeight
         );
 
         emit DoneProcessing(msg.sender, _batchNo);
@@ -158,269 +192,88 @@ contract CoffeeSupplyChain is Ownable {
         public
         view
         returns (
-            string memory procAddress,
+            string memory processorAddress,
             string memory typeOfDrying,
+            string memory humidityAfterDrying,
             string memory roastImageHash,
-            string memory roastTemp,
-            string memory typeOfRoast,
-            string memory roastDate,
-            string memory millDate,
-            uint256 processorPrice
+            string[] memory tempTypeRoast,
+            string[] memory roastMillDates,
+            string memory processorPricePerKilo,
+            string memory processBatchWeight
         )
     {
         (
-            procAddress,
+            processorAddress,
             typeOfDrying,
+            humidityAfterDrying,
             roastImageHash,
-            roastTemp,
-            typeOfRoast,
-            roastDate,
-            millDate,
-            processorPrice
+            tempTypeRoast,
+            roastMillDates,
+            processorPricePerKilo,
+            processBatchWeight
         ) = supplyChainStorage.getProcessData(_batchNo);
 
         return (
-            procAddress,
+            processorAddress,
             typeOfDrying,
+            humidityAfterDrying,
             roastImageHash,
-            roastTemp,
-            typeOfRoast,
-            roastDate,
-            millDate,
-            processorPrice
+            tempTypeRoast,
+            roastMillDates,
+            processorPricePerKilo,
+            processBatchWeight
         );
     }
 
-    function addGrainData(
+    function addTasteData(
         address _batchNo,
-        uint256 _tasteScore,
-        uint256 _grainPrice
-    )
-        public
-        isValidPerformer(_batchNo, "INSPECTOR DE GRANO/AGRICULTOR")
-        returns (bool)
-    {
-        bool status = supplyChainStorage.setGrainData(
+        string memory _tastingScore,
+        string memory _tastingServicePrice
+    ) public isValidPerformer(_batchNo, "TASTER") returns (bool) {
+        bool status = supplyChainStorage.setTasteData(
             _batchNo,
-            _tasteScore,
-            _grainPrice
+            _tastingScore,
+            _tastingServicePrice
         );
 
-        emit SetGrainData(msg.sender, _batchNo);
+        emit DoneTasting(msg.sender, _batchNo);
 
         return (status);
     }
 
-    function getGrainData(address _batchNo)
+    function getTasteData(address _batchNo)
         public
         view
-        returns (uint256 tasteScore, uint256 grainPrice)
+        returns (string memory tastingScore, string memory tastingServicePrice)
     {
-        (tasteScore, grainPrice) = supplyChainStorage.getGrainData(_batchNo);
-
-        return (tasteScore, grainPrice);
-    }
-
-    function addAgglomData(
-        address _batchNo,
-        string memory _agglomAddress,
-        string memory _agglomDate,
-        uint256 _storagePrice
-    ) public isValidPerformer(_batchNo, "AGLOMERADOR") returns (bool) {
-        bool status = supplyChainStorage.setAgglomData(
-            _batchNo,
-            _agglomAddress,
-            _agglomDate,
-            _storagePrice
+        (tastingScore, tastingServicePrice) = supplyChainStorage.getTasteData(
+            _batchNo
         );
 
-        emit DoneAgglomeration(msg.sender, _batchNo);
+        return (tastingScore, tastingServicePrice);
+    }
+
+    function addCoffeeSellData(
+        address _batchNo,
+        string memory _beanPricePerKilo
+    ) public isValidPerformer(_batchNo, "SELLER") returns (bool) {
+        bool status = supplyChainStorage.setCoffeeSellData(
+            _batchNo,
+            _beanPricePerKilo
+        );
+
+        emit DoneCoffeeSelling(msg.sender, _batchNo);
 
         return (status);
     }
 
-    function getAgglomData(address _batchNo)
+    function getCoffeeSellData(address _batchNo)
         public
         view
-        returns (
-            string memory agglomAddress,
-            string memory agglomDate,
-            uint256 storagePrice
-        )
+        returns (string memory beanPricePerKilo)
     {
-        (agglomAddress, agglomDate, storagePrice) = supplyChainStorage
-            .getAgglomData(_batchNo);
+        (beanPricePerKilo) = supplyChainStorage.getCoffeeSellData(_batchNo);
 
-        return (agglomAddress, agglomDate, storagePrice);
-    }
-
-    function addShipPackerData(
-        address _batchNo,
-        string memory _transportTypeP,
-        string memory _pickupDateP,
-        uint256 _shipPriceP
-    )
-        public
-        isValidPerformer(_batchNo, "TRANSPORTISTA A EMPACADORA")
-        returns (bool)
-    {
-        bool status = supplyChainStorage.setShipPackerData(
-            _batchNo,
-            _transportTypeP,
-            _pickupDateP,
-            _shipPriceP
-        );
-
-        emit DoneShippingPacker(msg.sender, _batchNo);
-
-        return (status);
-    }
-
-    function getShipPackerData(address _batchNo)
-        public
-        view
-        returns (
-            string memory transportTypeP,
-            string memory pickupDateP,
-            uint256 shipPriceP
-        )
-    {
-        (transportTypeP, pickupDateP, shipPriceP) = supplyChainStorage
-            .getShipPackerData(_batchNo);
-
-        return (transportTypeP, pickupDateP, shipPriceP);
-    }
-
-    function addPackData(
-        address _batchNo,
-        string memory _packAddress,
-        string memory _arrivalDateP,
-        string memory _packDate,
-        uint256 _packPrice
-    ) public isValidPerformer(_batchNo, "EMPACADORA") returns (bool) {
-        bool status = supplyChainStorage.setPackData(
-            _batchNo,
-            _packAddress,
-            _arrivalDateP,
-            _packDate,
-            _packPrice
-        );
-
-        emit DonePackaging(msg.sender, _batchNo);
-
-        return (status);
-    }
-
-    function getPackData(address _batchNo)
-        public
-        view
-        returns (
-            string memory packAddress,
-            string memory arrivalDateP,
-            string memory packDate,
-            uint256 packPrice
-        )
-    {
-        (packAddress, arrivalDateP, packDate, packPrice) = supplyChainStorage
-            .getPackData(_batchNo);
-
-        return (packAddress, arrivalDateP, packDate, packPrice);
-    }
-
-    function addShipRetailerData(
-        address _batchNo,
-        string memory _transportTypeR,
-        string memory _pickupDateR,
-        uint256 _shipPriceR
-    )
-        public
-        isValidPerformer(_batchNo, "TRANSPORTISTA A RETAILER")
-        returns (bool)
-    {
-        bool status = supplyChainStorage.setShipRetailerData(
-            _batchNo,
-            _transportTypeR,
-            _pickupDateR,
-            _shipPriceR
-        );
-
-        emit DoneShippingRetailer(msg.sender, _batchNo);
-
-        return (status);
-    }
-
-    function getShipRetailerData(address _batchNo)
-        public
-        view
-        returns (
-            string memory transportTypeR,
-            string memory pickupDateR,
-            uint256 shipPriceR
-        )
-    {
-        (transportTypeR, pickupDateR, shipPriceR) = supplyChainStorage
-            .getShipRetailerData(_batchNo);
-
-        return (transportTypeR, pickupDateR, shipPriceR);
-    }
-
-    function addRetailerData(
-        address _batchNo,
-        string memory _arrivalDateW,
-        string memory _arrivalDateSP,
-        string memory _warehouseName,
-        string memory _warehouseAddress,
-        string memory _salePointAddress,
-        uint256 _shipPriceSP,
-        uint256 _productPrice
-    ) public isValidPerformer(_batchNo, "RETAILER") returns (bool) {
-        bool status = supplyChainStorage.setRetailerData(
-            _batchNo,
-            _arrivalDateW,
-            _arrivalDateSP,
-            _warehouseName,
-            _warehouseAddress,
-            _salePointAddress,
-            _shipPriceSP,
-            _productPrice
-        );
-
-        emit DoneRetailer(msg.sender, _batchNo);
-
-        return (status);
-    }
-
-    function getRetailerData(address _batchNo)
-        public
-        view
-        returns (
-            string memory arrivalDateW,
-            string memory arrivalDateSP,
-            string memory warehouseName,
-            string memory warehouseAddress,
-            string memory salePointAddress,
-            uint256 shipPriceSP,
-            uint256 productPrice
-        )
-    {
-        (
-            arrivalDateW,
-            arrivalDateSP,
-            warehouseName,
-            warehouseAddress,
-            salePointAddress,
-            shipPriceSP,
-            productPrice
-        ) = supplyChainStorage.getRetailerData(_batchNo);
-
-        return (
-            arrivalDateW,
-            arrivalDateSP,
-            warehouseName,
-            warehouseAddress,
-            salePointAddress,
-            shipPriceSP,
-            productPrice
-        );
+        return (beanPricePerKilo);
     }
 }
