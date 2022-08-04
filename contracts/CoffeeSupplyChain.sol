@@ -162,7 +162,7 @@ contract CoffeeSupplyChain is Ownable {
 
     function addProcessData(
         address _batchNo,
-        string memory _processorAddress,
+        string[] memory _addressLatLngProcessor,
         string memory _typeOfDrying,
         string memory _humidityAfterDrying,
         string memory _roastImageHash,
@@ -173,7 +173,7 @@ contract CoffeeSupplyChain is Ownable {
     ) public isValidPerformer(_batchNo, "PROCESSOR") returns (bool) {
         bool status = supplyChainStorage.setProcessData(
             _batchNo,
-            _processorAddress,
+            _addressLatLngProcessor,
             _typeOfDrying,
             _humidityAfterDrying,
             _roastImageHash,
@@ -192,7 +192,7 @@ contract CoffeeSupplyChain is Ownable {
         public
         view
         returns (
-            string memory processorAddress,
+            string[] memory addressLatLngProcessor,
             string memory typeOfDrying,
             string memory humidityAfterDrying,
             string memory roastImageHash,
@@ -203,7 +203,7 @@ contract CoffeeSupplyChain is Ownable {
         )
     {
         (
-            processorAddress,
+            addressLatLngProcessor,
             typeOfDrying,
             humidityAfterDrying,
             roastImageHash,
@@ -214,7 +214,7 @@ contract CoffeeSupplyChain is Ownable {
         ) = supplyChainStorage.getProcessData(_batchNo);
 
         return (
-            processorAddress,
+            addressLatLngProcessor,
             typeOfDrying,
             humidityAfterDrying,
             roastImageHash,

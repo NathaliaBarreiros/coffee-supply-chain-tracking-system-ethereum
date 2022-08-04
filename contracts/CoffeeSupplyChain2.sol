@@ -56,12 +56,14 @@ contract CoffeeSupplyChain2 is Ownable {
     function addWarehousingData(
         address _batchNo,
         string memory _warehouseAddress,
+        string[] memory _latLngWarehouse,
         string memory _warehouseArrivalDate,
         string memory _storagePricePerKiloPerTime
     ) public isValidPerformer(_batchNo, "WAREHOUSE") returns (bool) {
         bool status = supplyChainStorage2.setWarehousingData(
             _batchNo,
             _warehouseAddress,
+            _latLngWarehouse,
             _warehouseArrivalDate,
             _storagePricePerKiloPerTime
         );
@@ -76,18 +78,21 @@ contract CoffeeSupplyChain2 is Ownable {
         view
         returns (
             string memory warehouseAddress,
+            string[] memory latLngWarehouse,
             string memory warehouseArrivalDate,
             string memory storagePricePerKiloPerTime
         )
     {
         (
             warehouseAddress,
+            latLngWarehouse,
             warehouseArrivalDate,
             storagePricePerKiloPerTime
         ) = supplyChainStorage2.getWarehousingData(_batchNo);
 
         return (
             warehouseAddress,
+            latLngWarehouse,
             warehouseArrivalDate,
             storagePricePerKiloPerTime
         );
@@ -136,6 +141,7 @@ contract CoffeeSupplyChain2 is Ownable {
     function addPackData(
         address _batchNo,
         string memory _packerAddress,
+        string[] memory _latLngPacker,
         string memory _packerArrivalDate,
         string memory _packingDate,
         string memory _packingPricePerKilo
@@ -143,6 +149,7 @@ contract CoffeeSupplyChain2 is Ownable {
         bool status = supplyChainStorage2.setPackData(
             _batchNo,
             _packerAddress,
+            _latLngPacker,
             _packerArrivalDate,
             _packingDate,
             _packingPricePerKilo
@@ -158,6 +165,7 @@ contract CoffeeSupplyChain2 is Ownable {
         view
         returns (
             string memory packerAddress,
+            string[] memory latLngPacker,
             string memory packerArrivalDate,
             string memory packingDate,
             string memory packingPricePerKilo
@@ -165,6 +173,7 @@ contract CoffeeSupplyChain2 is Ownable {
     {
         (
             packerAddress,
+            latLngPacker,
             packerArrivalDate,
             packingDate,
             packingPricePerKilo
@@ -172,6 +181,7 @@ contract CoffeeSupplyChain2 is Ownable {
 
         return (
             packerAddress,
+            latLngPacker,
             packerArrivalDate,
             packingDate,
             packingPricePerKilo
@@ -223,8 +233,8 @@ contract CoffeeSupplyChain2 is Ownable {
         string[] memory _warehouseSalepointArrivalDate,
         string memory _warehouseRetailerName,
         string memory _salepointRetailerName,
-        string memory _warehouseRetailerAddress,
-        string memory _salepointRetailerAddress,
+        string[] memory _addressLatLngWarehouseRetailer,
+        string[] memory _addressLatLngSalepointRetailer,
         string memory _toSalepointTransportType,
         string memory _toSalepointShippingPrice,
         string memory _retailerPricePerKilo
@@ -234,8 +244,8 @@ contract CoffeeSupplyChain2 is Ownable {
             _warehouseSalepointArrivalDate,
             _warehouseRetailerName,
             _salepointRetailerName,
-            _warehouseRetailerAddress,
-            _salepointRetailerAddress,
+            _addressLatLngWarehouseRetailer,
+            _addressLatLngSalepointRetailer,
             _toSalepointTransportType,
             _toSalepointShippingPrice,
             _retailerPricePerKilo
@@ -253,8 +263,8 @@ contract CoffeeSupplyChain2 is Ownable {
             string[] memory warehouseSalepointArrivalDate,
             string memory warehouseRetailerName,
             string memory salepointRetailerName,
-            string memory warehouseRetailerAddress,
-            string memory salepointRetailerAddress,
+            string[] memory addressLatLngWarehouseRetailer,
+            string[] memory addressLatLngSalepointRetailer,
             string memory toSalepointTransportType,
             string memory toSalepointShippingPrice,
             string memory retailerPricePerKilo
@@ -264,8 +274,8 @@ contract CoffeeSupplyChain2 is Ownable {
             warehouseSalepointArrivalDate,
             warehouseRetailerName,
             salepointRetailerName,
-            warehouseRetailerAddress,
-            salepointRetailerAddress,
+            addressLatLngWarehouseRetailer,
+            addressLatLngSalepointRetailer,
             toSalepointTransportType,
             toSalepointShippingPrice,
             retailerPricePerKilo
@@ -275,8 +285,8 @@ contract CoffeeSupplyChain2 is Ownable {
             warehouseSalepointArrivalDate,
             warehouseRetailerName,
             salepointRetailerName,
-            warehouseRetailerAddress,
-            salepointRetailerAddress,
+            addressLatLngWarehouseRetailer,
+            addressLatLngSalepointRetailer,
             toSalepointTransportType,
             toSalepointShippingPrice,
             retailerPricePerKilo

@@ -68,7 +68,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     }
 
     struct Process {
-        string processorAddress;
+        string[] addressLatLngProcessor;
         string typeOfDrying;
         string humidityAfterDrying;
         string roastImageHash;
@@ -269,7 +269,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
 
     function setProcessData(
         address batchNo,
-        string memory _processorAddress,
+        string[] memory _addressLatLngProcessor,
         string memory _typeOfDrying,
         string memory _humidityAfterDrying,
         string memory _roastImageHash,
@@ -278,7 +278,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         string memory _processorPricePerKilo,
         string memory _processBatchWeight
     ) public onlyAuthCaller returns (bool) {
-        processData.processorAddress = _processorAddress;
+        processData.addressLatLngProcessor = _addressLatLngProcessor;
         processData.typeOfDrying = _typeOfDrying;
         processData.humidityAfterDrying = _humidityAfterDrying;
         processData.roastImageHash = _roastImageHash;
@@ -298,7 +298,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         view
         onlyAuthCaller
         returns (
-            string memory processorAddress,
+            string[] memory addressLatLngProcessor,
             string memory typeOfDrying,
             string memory humidityAfterDrying,
             string memory roastImageHash,
@@ -310,7 +310,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     {
         Process memory tmpData = batchProcess[batchNo];
         return (
-            tmpData.processorAddress,
+            tmpData.addressLatLngProcessor,
             tmpData.typeOfDrying,
             tmpData.humidityAfterDrying,
             tmpData.roastImageHash,

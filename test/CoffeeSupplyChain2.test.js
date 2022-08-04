@@ -143,7 +143,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 		);
 	}
 
-	describe("Cultivation Activities", () => {
+	describe("Coffee Supply Chain Activities", () => {
 		it("should add warehouse data", async () => {
 			_name = "Santiago Endara";
 			_email = "processortest@gmail.com";
@@ -202,7 +202,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -213,7 +217,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -243,13 +247,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			var { logs } = await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -317,7 +323,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -328,7 +338,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -358,13 +368,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -380,13 +392,21 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				"Warehouse address checked:"
 			);
+			for (let i = 0; i < activityData[1]; i++) {
+				assert.equal(
+					activityData[1][i],
+					_latLngWarehouse[i],
+					"Warehouse latitude & longitude checked: "
+				);
+			}
+
 			assert.equal(
-				activityData[1],
+				activityData[2],
 				_warehouseArrivalDate,
 				"Warehouse Arrival Date checked:"
 			);
 			assert.equal(
-				activityData[2],
+				activityData[3],
 				_storagePricePerKiloPerTime,
 				"Storage Price Per Kilo Per Time checked:"
 			);
@@ -466,7 +486,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -477,7 +501,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -507,13 +531,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -611,7 +637,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -622,7 +652,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -652,13 +682,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -788,7 +820,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -799,7 +835,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -829,13 +865,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -855,6 +893,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -862,6 +901,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			var { logs } = await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -962,7 +1002,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -973,7 +1017,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -1003,13 +1047,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -1029,6 +1075,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -1036,6 +1083,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			var { logs } = await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -1048,14 +1096,22 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			assert.equal(activityData[0], _packerAddress, "Packer address checked:");
+
+			for (let i = 0; i < activityData[1]; i++) {
+				assert.equal(
+					activityData[1][i],
+					_latLngPacker[i],
+					"Packer latitude & longitude checked: "
+				);
+			}
 			assert.equal(
-				activityData[1],
+				activityData[2],
 				_packerArrivalDate,
 				"Arrival date at packer checked:"
 			);
-			assert.equal(activityData[2], _packingDate, "Packaging date checked:");
+			assert.equal(activityData[3], _packingDate, "Packaging date checked:");
 			assert.equal(
-				activityData[3],
+				activityData[4],
 				_packingPricePerKilo,
 				"Packaging price per kilo checked:"
 			);
@@ -1167,7 +1223,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -1178,7 +1238,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -1208,13 +1268,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -1234,6 +1296,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -1241,6 +1304,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -1374,7 +1438,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -1385,7 +1453,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -1415,13 +1483,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -1441,6 +1511,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -1448,6 +1519,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -1610,7 +1682,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -1621,7 +1697,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -1651,13 +1727,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -1677,6 +1755,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -1684,6 +1763,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -1705,9 +1785,16 @@ contract("CoffeeSupplyChain", function (accounts) {
 			const _warehouseSalepointArrivalDate = ["08-10-2020", "10-10-2020"];
 			const _warehouseRetailerName = "La Favorita";
 			const _salepointRetailerName = "Supermaxi de La América";
-			const _warehouseRetailerAddress = "Av Gral Enriquez";
-			const _salepointRetailerAddress =
-				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521";
+			const _addressLatLngWarehouseRetailer = [
+				"Av Gral Enriquez",
+				"-0.3104378496257488",
+				"-78.45179949999996",
+			];
+			const _addressLatLngSalepointRetailer = [
+				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521",
+				"-0.1960489791160463",
+				"-78.5001955780285",
+			];
 			const _toSalepointTransportType = "Camión";
 			const _toSalepointShippingPrice = "30";
 			const _retailerPricePerKilo = "15";
@@ -1715,10 +1802,10 @@ contract("CoffeeSupplyChain", function (accounts) {
 			var { logs } = await this.coffeeSupplyChain2.addRetailerData(
 				batchNo,
 				_warehouseSalepointArrivalDate,
-				_warehouseRetailerAddress,
-				_salepointRetailerAddress,
 				_warehouseRetailerName,
 				_salepointRetailerName,
+				_addressLatLngWarehouseRetailer,
+				_addressLatLngSalepointRetailer,
 				_toSalepointTransportType,
 				_toSalepointShippingPrice,
 				_retailerPricePerKilo,
@@ -1851,7 +1938,11 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await addHarvestData(this.coffeeSupplyChain, batchNo);
 
-			const _processorAddress = "37QM+GM2, Nanegalito";
+			const _addressLatLngProcessor = [
+				"37QM+GM2, Nanegalito",
+				"0.08899853404673483",
+				"-78.71585940288742",
+			];
 			const _typeOfDrying = "Artesanal";
 			const _humidityAfterDrying = "18";
 			const _roastImageHash = "0x40op09";
@@ -1862,7 +1953,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			await this.coffeeSupplyChain.addProcessData(
 				batchNo,
-				_processorAddress,
+				_addressLatLngProcessor,
 				_typeOfDrying,
 				_humidityAfterDrying,
 				_roastImageHash,
@@ -1892,13 +1983,15 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			const _warehouseAddress =
-				"17 DE JULIO Y JAIME ROLDOS 0.0228954,-78.893441, San Miguel de Los Bancos 171202";
+				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
+			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
 				batchNo,
 				_warehouseAddress,
+				_latLngWarehouse,
 				_warehouseArrivalDate,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
@@ -1918,6 +2011,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			const _packerAddress =
 				"Av. Pichincha s/n, Pedro Vicente Maldonado 170850";
+			const _latLngPacker = ["0.082586", "-79.048920"];
 			const _packerArrivalDate = "26-09-2020";
 			const _packingDate = "30-09-20202";
 			const _packingPricePerKilo = "100";
@@ -1925,6 +2019,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.coffeeSupplyChain2.addPackData(
 				batchNo,
 				_packerAddress,
+				_latLngPacker,
 				_packerArrivalDate,
 				_packingDate,
 				_packingPricePerKilo,
@@ -1946,9 +2041,16 @@ contract("CoffeeSupplyChain", function (accounts) {
 			const _warehouseSalepointArrivalDate = ["08-10-2020", "10-10-2020"];
 			const _warehouseRetailerName = "La Favorita";
 			const _salepointRetailerName = "Supermaxi de La América";
-			const _warehouseRetailerAddress = "Av Gral Enriquez";
-			const _salepointRetailerAddress =
-				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521";
+			const _addressLatLngWarehouseRetailer = [
+				"Av Gral Enriquez",
+				"-0.3104378496257488",
+				"-78.45179949999996",
+			];
+			const _addressLatLngSalepointRetailer = [
+				"Gaspar de Carvajal s/n y, Av. la Gasca, Quito 170521",
+				"-0.1960489791160463",
+				"-78.5001955780285",
+			];
 			const _toSalepointTransportType = "Camión";
 			const _toSalepointShippingPrice = "30";
 			const _retailerPricePerKilo = "15";
@@ -1956,10 +2058,10 @@ contract("CoffeeSupplyChain", function (accounts) {
 			await this.coffeeSupplyChain2.addRetailerData(
 				batchNo,
 				_warehouseSalepointArrivalDate,
-				_warehouseRetailerAddress,
-				_salepointRetailerAddress,
 				_warehouseRetailerName,
 				_salepointRetailerName,
+				_addressLatLngWarehouseRetailer,
+				_addressLatLngSalepointRetailer,
 				_toSalepointTransportType,
 				_toSalepointShippingPrice,
 				_retailerPricePerKilo,
@@ -1981,24 +2083,31 @@ contract("CoffeeSupplyChain", function (accounts) {
 
 			assert.equal(
 				activityData[1],
-				_warehouseRetailerAddress,
+				_warehouseRetailerName,
 				"Warehouse Retailer Name checked:"
 			);
 			assert.equal(
 				activityData[2],
-				_salepointRetailerAddress,
+				_salepointRetailerName,
 				"salepoint Retailer Name checked:"
 			);
-			assert.equal(
-				activityData[3],
-				_warehouseRetailerName,
-				"Warehouse address checked:"
-			);
-			assert.equal(
-				activityData[4],
-				_salepointRetailerName,
-				"Salepoint address checked:"
-			);
+
+			for (let i = 0; i < activityData[3]; i++) {
+				assert.equal(
+					activityData[3][i],
+					_addressLatLngWarehouseRetailer[i],
+					"Warehouse Retailer address, latitude & longitude checked: "
+				);
+			}
+
+			for (let i = 0; i < activityData[4]; i++) {
+				assert.equal(
+					activityData[4][i],
+					_addressLatLngSalepointRetailer[i],
+					"Salepoint Retailer address, latitude & longitude checked: "
+				);
+			}
+
 			assert.equal(
 				activityData[5],
 				_toSalepointTransportType,

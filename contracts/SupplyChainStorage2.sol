@@ -42,6 +42,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
 
     struct Warehousing {
         string warehouseAddress;
+        string[] latLngWarehouse;
         string warehouseArrivalDate;
         string storagePricePerKiloPerTime;
     }
@@ -54,6 +55,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
 
     struct Pack {
         string packerAddress;
+        string[] latLngPacker;
         string packerArrivalDate;
         string packingDate;
         string packingPricePerKilo;
@@ -69,8 +71,8 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         string[] warehouseSalepointArrivalDate;
         string warehouseRetailerName;
         string salepointRetailerName;
-        string warehouseRetailerAddress;
-        string salepointRetailerAddress;
+        string[] addressLatLngWarehouseRetailer;
+        string[] addressLatLngSalepointRetailer;
         string toSalepointTransportType;
         string toSalepointShippingPrice;
         string retailerPricePerKilo;
@@ -91,10 +93,12 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
     function setWarehousingData(
         address batchNo,
         string memory _warehouseAddress,
+        string[] memory _latLngWarehouse,
         string memory _warehouseArrivalDate,
         string memory _storagePricePerKiloPerTime
     ) public onlyAuthCaller returns (bool) {
         warehousingData.warehouseAddress = _warehouseAddress;
+        warehousingData.latLngWarehouse = _latLngWarehouse;
         warehousingData.warehouseArrivalDate = _warehouseArrivalDate;
         warehousingData
             .storagePricePerKiloPerTime = _storagePricePerKiloPerTime;
@@ -113,6 +117,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         onlyAuthCaller
         returns (
             string memory warehouseAddress,
+            string[] memory latLngWarehouse,
             string memory warehouseArrivalDate,
             string memory storagePricePerKiloPerTime
         )
@@ -120,6 +125,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         Warehousing memory tmpData = batchWarehousing[batchNo];
         return (
             tmpData.warehouseAddress,
+            tmpData.latLngWarehouse,
             tmpData.warehouseArrivalDate,
             tmpData.storagePricePerKiloPerTime
         );
@@ -161,11 +167,13 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
     function setPackData(
         address batchNo,
         string memory _packerAddress,
+        string[] memory _latLngPacker,
         string memory _packerArrivalDate,
         string memory _packingDate,
         string memory _packingPricePerKilo
     ) public onlyAuthCaller returns (bool) {
         packData.packerAddress = _packerAddress;
+        packData.latLngPacker = _latLngPacker;
         packData.packerArrivalDate = _packerArrivalDate;
         packData.packingDate = _packingDate;
         packData.packingPricePerKilo = _packingPricePerKilo;
@@ -184,6 +192,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         onlyAuthCaller
         returns (
             string memory packerAddress,
+            string[] memory latLngPacker,
             string memory packerArrivalDate,
             string memory packingDate,
             string memory packingPricePerKilo
@@ -192,6 +201,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         Pack memory tmpData = batchPack[batchNo];
         return (
             tmpData.packerAddress,
+            tmpData.latLngPacker,
             tmpData.packerArrivalDate,
             tmpData.packingDate,
             tmpData.packingPricePerKilo
@@ -236,8 +246,8 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         string[] memory _warehouseSalepointArrivalDate,
         string memory _warehouseRetailerName,
         string memory _salepointRetailerName,
-        string memory _warehouseRetailerAddress,
-        string memory _salepointRetailerAddress,
+        string[] memory _addressLatLngWarehouseRetailer,
+        string[] memory _addressLatLngSalepointRetailer,
         string memory _toSalepointTransportType,
         string memory _toSalepointShippingPrice,
         string memory _retailerPricePerKilo
@@ -246,8 +256,10 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
             .warehouseSalepointArrivalDate = _warehouseSalepointArrivalDate;
         retailerData.warehouseRetailerName = _warehouseRetailerName;
         retailerData.salepointRetailerName = _salepointRetailerName;
-        retailerData.warehouseRetailerAddress = _warehouseRetailerAddress;
-        retailerData.salepointRetailerAddress = _salepointRetailerAddress;
+        retailerData
+            .addressLatLngWarehouseRetailer = _addressLatLngWarehouseRetailer;
+        retailerData
+            .addressLatLngSalepointRetailer = _addressLatLngSalepointRetailer;
         retailerData.toSalepointTransportType = _toSalepointTransportType;
         retailerData.toSalepointShippingPrice = _toSalepointShippingPrice;
         retailerData.retailerPricePerKilo = _retailerPricePerKilo;
@@ -265,8 +277,8 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
             string[] memory warehouseSalepointArrivalDate,
             string memory warehouseRetailerName,
             string memory salepointRetailerName,
-            string memory warehouseRetailerAddress,
-            string memory salepointRetailerAddress,
+            string[] memory addressLatLngWarehouseRetailer,
+            string[] memory addressLatLngSalepointRetailer,
             string memory toSalepointTransportType,
             string memory toSalepointShippingPrice,
             string memory retailerPricePerKilo
@@ -277,8 +289,8 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
             tmpData.warehouseSalepointArrivalDate,
             tmpData.warehouseRetailerName,
             tmpData.salepointRetailerName,
-            tmpData.warehouseRetailerAddress,
-            tmpData.salepointRetailerAddress,
+            tmpData.addressLatLngWarehouseRetailer,
+            tmpData.addressLatLngSalepointRetailer,
             tmpData.toSalepointTransportType,
             tmpData.toSalepointShippingPrice,
             tmpData.retailerPricePerKilo
