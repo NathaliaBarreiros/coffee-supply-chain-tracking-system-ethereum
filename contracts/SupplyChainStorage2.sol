@@ -44,6 +44,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         string warehouseAddress;
         string[] latLngWarehouse;
         string warehouseArrivalDate;
+        string storageTime;
         string storagePricePerKiloPerTime;
     }
 
@@ -95,11 +96,13 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
         string memory _warehouseAddress,
         string[] memory _latLngWarehouse,
         string memory _warehouseArrivalDate,
+        string memory _storageTime,
         string memory _storagePricePerKiloPerTime
     ) public onlyAuthCaller returns (bool) {
         warehousingData.warehouseAddress = _warehouseAddress;
         warehousingData.latLngWarehouse = _latLngWarehouse;
         warehousingData.warehouseArrivalDate = _warehouseArrivalDate;
+        warehousingData.storageTime = _storageTime;
         warehousingData
             .storagePricePerKiloPerTime = _storagePricePerKiloPerTime;
 
@@ -119,6 +122,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
             string memory warehouseAddress,
             string[] memory latLngWarehouse,
             string memory warehouseArrivalDate,
+            string memory storageTime,
             string memory storagePricePerKiloPerTime
         )
     {
@@ -127,6 +131,7 @@ contract SupplyChainStorage2 is SupplyChainStorageOwnable {
             tmpData.warehouseAddress,
             tmpData.latLngWarehouse,
             tmpData.warehouseArrivalDate,
+            tmpData.storageTime,
             tmpData.storagePricePerKiloPerTime
         );
     }

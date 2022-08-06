@@ -620,10 +620,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 			const tastingEvent = logs.find((e) => e.event === "DoneTasting");
 			assert.exists(tastingEvent, "DoneTasting event does not exist");
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			var { logs } = await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -713,10 +715,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 			const tastingEvent = logs.find((e) => e.event === "DoneTasting");
 			assert.exists(tastingEvent, "DoneTasting event does not exist");
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -727,7 +731,13 @@ contract("CoffeeSupplyChain", function (accounts) {
 			);
 
 			assert.equal(
-				activityData,
+				activityData[0],
+				_coffeeSellingBatchWeight,
+				"Coffee Batch Selling Weight checked:"
+			);
+
+			assert.equal(
+				activityData[1],
 				_beanPricePerKilo,
 				"Bean Price Per Kilo checked:"
 			);

@@ -255,10 +255,12 @@ contract CoffeeSupplyChain is Ownable {
 
     function addCoffeeSellData(
         address _batchNo,
+        string memory _coffeeSellingBatchWeight,
         string memory _beanPricePerKilo
     ) public isValidPerformer(_batchNo, "SELLER") returns (bool) {
         bool status = supplyChainStorage.setCoffeeSellData(
             _batchNo,
+            _coffeeSellingBatchWeight,
             _beanPricePerKilo
         );
 
@@ -270,10 +272,14 @@ contract CoffeeSupplyChain is Ownable {
     function getCoffeeSellData(address _batchNo)
         public
         view
-        returns (string memory beanPricePerKilo)
+        returns (
+            string memory coffeeSellingBatchWeight,
+            string memory beanPricePerKilo
+        )
     {
-        (beanPricePerKilo) = supplyChainStorage.getCoffeeSellData(_batchNo);
+        (coffeeSellingBatchWeight, beanPricePerKilo) = supplyChainStorage
+            .getCoffeeSellData(_batchNo);
 
-        return (beanPricePerKilo);
+        return (coffeeSellingBatchWeight, beanPricePerKilo);
     }
 }

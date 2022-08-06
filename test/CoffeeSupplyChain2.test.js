@@ -8,7 +8,7 @@ const SupplyChainUser = artifacts.require("SupplyChainUser");
 const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 const SupplyChainStorage2 = artifacts.require("SupplyChainStorage2");
 
-contract("CoffeeSupplyChain", function (accounts) {
+contract("CoffeeSupplyChain2", function (accounts) {
 	const authorizedCaller = accounts[0];
 	const farmer = accounts[1];
 	const processor = accounts[2];
@@ -238,10 +238,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -250,6 +252,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			var { logs } = await this.coffeeSupplyChain2.addWarehousingData(
@@ -257,6 +260,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -359,10 +363,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -371,6 +377,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -378,6 +385,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -405,8 +413,9 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseArrivalDate,
 				"Warehouse Arrival Date checked:"
 			);
+			assert.equal(activityData[3], _storageTime, "Storage Time checked:");
 			assert.equal(
-				activityData[3],
+				activityData[4],
 				_storagePricePerKiloPerTime,
 				"Storage Price Per Kilo Per Time checked:"
 			);
@@ -522,10 +531,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -534,6 +545,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -541,6 +553,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -673,10 +686,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -685,6 +700,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -692,6 +708,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -856,10 +873,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -868,6 +887,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -875,6 +895,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -1038,10 +1059,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -1050,6 +1073,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -1057,6 +1081,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -1259,10 +1284,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -1271,6 +1298,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -1278,6 +1306,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -1474,10 +1503,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -1486,6 +1517,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -1493,6 +1525,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -1718,10 +1751,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -1730,6 +1765,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -1737,6 +1773,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);
@@ -1974,10 +2011,12 @@ contract("CoffeeSupplyChain", function (accounts) {
 				{ from: taster }
 			);
 
+			const _coffeeSellingBatchWeight = "30";
 			const _beanPricePerKilo = "50";
 
 			await this.coffeeSupplyChain.addCoffeeSellData(
 				batchNo,
+				_coffeeSellingBatchWeight,
 				_beanPricePerKilo,
 				{ from: farmer }
 			);
@@ -1986,6 +2025,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				"17 DE JULIO Y JAIME ROLDOS, San Miguel de Los Bancos 171202";
 			const _latLngWarehouse = ["0.0228954", "-78.893441"];
 			const _warehouseArrivalDate = "10-09-2020";
+			const _storageTime = "45";
 			const _storagePricePerKiloPerTime = "100";
 
 			await this.coffeeSupplyChain2.addWarehousingData(
@@ -1993,6 +2033,7 @@ contract("CoffeeSupplyChain", function (accounts) {
 				_warehouseAddress,
 				_latLngWarehouse,
 				_warehouseArrivalDate,
+				_storageTime,
 				_storagePricePerKiloPerTime,
 				{ from: warehouse }
 			);

@@ -84,6 +84,7 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
     }
 
     struct CoffeeSell {
+        string coffeeSellingBatchWeight;
         string beanPricePerKilo;
     }
 
@@ -344,11 +345,12 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         return (tmpData.tastingScore, tmpData.tastingServicePrice);
     }
 
-    function setCoffeeSellData(address batchNo, string memory _beanPricePerKilo)
-        public
-        onlyAuthCaller
-        returns (bool)
-    {
+    function setCoffeeSellData(
+        address batchNo,
+        string memory _coffeeSellingBatchWeight,
+        string memory _beanPricePerKilo
+    ) public onlyAuthCaller returns (bool) {
+        coffeeSellData.coffeeSellingBatchWeight = _coffeeSellingBatchWeight;
         coffeeSellData.beanPricePerKilo = _beanPricePerKilo;
 
         batchCoffeSell[batchNo] = coffeeSellData;
@@ -360,9 +362,12 @@ contract SupplyChainStorage is SupplyChainStorageOwnable {
         public
         view
         onlyAuthCaller
-        returns (string memory beanPricePerKilo)
+        returns (
+            string memory coffeeSellingBatchWeight,
+            string memory beanPricePerKilo
+        )
     {
         CoffeeSell memory tmpData = batchCoffeSell[batchNo];
-        return (tmpData.beanPricePerKilo);
+        return (tmpData.coffeeSellingBatchWeight, tmpData.beanPricePerKilo);
     }
 }

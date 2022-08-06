@@ -41,7 +41,7 @@ module.exports = function (deployer) {
 			await instance.authorizeCaller(SupplyChainStorage2.address);
 			await instance.authorizeCaller(CoffeeSupplyChain.address);
 			await instance.authorizeCaller(CoffeeSupplyChain2.address);
-
+			await instance.authorizeCaller(SupplyChainUser.address);
 			return instance;
 		})
 		.then(() => {

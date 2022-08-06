@@ -58,6 +58,7 @@ contract CoffeeSupplyChain2 is Ownable {
         string memory _warehouseAddress,
         string[] memory _latLngWarehouse,
         string memory _warehouseArrivalDate,
+        string memory _storageTime,
         string memory _storagePricePerKiloPerTime
     ) public isValidPerformer(_batchNo, "WAREHOUSE") returns (bool) {
         bool status = supplyChainStorage2.setWarehousingData(
@@ -65,6 +66,7 @@ contract CoffeeSupplyChain2 is Ownable {
             _warehouseAddress,
             _latLngWarehouse,
             _warehouseArrivalDate,
+            _storageTime,
             _storagePricePerKiloPerTime
         );
 
@@ -80,6 +82,7 @@ contract CoffeeSupplyChain2 is Ownable {
             string memory warehouseAddress,
             string[] memory latLngWarehouse,
             string memory warehouseArrivalDate,
+            string memory storageTime,
             string memory storagePricePerKiloPerTime
         )
     {
@@ -87,6 +90,7 @@ contract CoffeeSupplyChain2 is Ownable {
             warehouseAddress,
             latLngWarehouse,
             warehouseArrivalDate,
+            storageTime,
             storagePricePerKiloPerTime
         ) = supplyChainStorage2.getWarehousingData(_batchNo);
 
@@ -94,6 +98,7 @@ contract CoffeeSupplyChain2 is Ownable {
             warehouseAddress,
             latLngWarehouse,
             warehouseArrivalDate,
+            storageTime,
             storagePricePerKiloPerTime
         );
     }
