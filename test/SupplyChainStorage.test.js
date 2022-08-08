@@ -2,7 +2,7 @@ const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 
 const _name = "John Quevedo";
 const _email = "farmertest@gmail.com";
-const _role = "FARMER";
+const _role = ["FARMER", "SELLER"];
 const _isActive = true;
 const _profileHash = "Qmadp4L61MaQQX5NFfjqaihnY8r7PmogqZL6wvX1HqwL";
 
@@ -27,7 +27,7 @@ contract("SupplyChainStorage", function (accounts) {
 		const authorizedCallerEvent = logs.find(
 			(e) => e.event === "AuthorizedCaller"
 		);
-		assert.exists(authorizedCallerEvent, "AuthorizedCaller does not exists");
+		assert.exists(authorizedCallerEvent, "AuthorizedCaller does not exist");
 	});
 
 	it("should DeAuthorize", async () => {
@@ -39,7 +39,7 @@ contract("SupplyChainStorage", function (accounts) {
 		const deAuthorizeCallerEvent = logs.find(
 			(e) => e.event === "DeAuthorizedCaller"
 		);
-		assert.exists(deAuthorizeCallerEvent, "DeAuthorizedCaller does not exists");
+		assert.exists(deAuthorizeCallerEvent, "DeAuthorizedCaller does not exist");
 	});
 
 	it("should Add New User", async () => {
@@ -53,17 +53,20 @@ contract("SupplyChainStorage", function (accounts) {
 		);
 
 		const updateUserEvent = logs.find((e) => e.event === "UserUpdate");
-		assert.exists(updateUserEvent, "UserUpdate does not exists");
+		assert.exists(updateUserEvent, "UserUpdate does not exist");
 
 		const updateUserRoleEvent = logs.find((e) => e.event === "UserRoleUpdate");
-		assert.exists(updateUserRoleEvent, "UserRoleUpdate does not exists");
+		assert.exists(updateUserRoleEvent, "UserRoleUpdate does not exist");
 
 		const user = await this.storageContract.getUser.call(userAddress);
 
 		assert.equal(user[0], _name, "Name checked:");
 		assert.equal(user[1], _email, "Contact No checked:");
-		assert.equal(user[2], _role, "Role checked:");
 		assert.equal(user[3], _isActive, "isActive checked:");
 		assert.equal(user[4], _profileHash, "Profile Hash checked:");
+
+		for (let i = 0; i < user[2].length; i++) {
+			assert.equal(user[2][i], _role[i], "Role checked: ");
+		}
 	});
 });

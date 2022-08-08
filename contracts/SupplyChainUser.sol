@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.15;
 
 import "./SupplyChainStorage.sol";
 import "./Ownable.sol";
@@ -10,11 +10,11 @@ contract SupplyChainUser is Ownable {
         address indexed user,
         string name,
         string email,
-        string role,
+        string[] role,
         bool isActive,
         string profileHash
     );
-    event UserRoleUpdate(address indexed user, string role);
+    event UserRoleUpdate(address indexed user, string[] role);
 
     SupplyChainStorage supplyChainStorage;
 
@@ -25,17 +25,20 @@ contract SupplyChainUser is Ownable {
     function updateUser(
         string memory _name,
         string memory _email,
-        string memory _role,
         bool _isActive,
         string memory _profileHash
     ) public returns (bool) {
         require(msg.sender != address(0));
 
+        (, , string[] memory lastRole, , ) = supplyChainStorage.getUser(
+            msg.sender
+        );
+
         bool status = supplyChainStorage.setUser(
             msg.sender,
             _name,
             _email,
-            _role,
+            lastRole,
             _isActive,
             _profileHash
         );
@@ -44,11 +47,11 @@ contract SupplyChainUser is Ownable {
             msg.sender,
             _name,
             _email,
-            _role,
+            lastRole,
             _isActive,
             _profileHash
         );
-        emit UserRoleUpdate(msg.sender, _role);
+        emit UserRoleUpdate(msg.sender, lastRole);
 
         return status;
     }
@@ -57,7 +60,7 @@ contract SupplyChainUser is Ownable {
         address _userAddress,
         string memory _name,
         string memory _email,
-        string memory _role,
+        string[] memory _role,
         bool _isActive,
         string memory _profileHash
     ) public onlyOwner returns (bool) {
@@ -91,7 +94,7 @@ contract SupplyChainUser is Ownable {
         returns (
             string memory name,
             string memory email,
-            string memory role,
+            string[] memory role,
             bool isActive,
             string memory profileHash
         )

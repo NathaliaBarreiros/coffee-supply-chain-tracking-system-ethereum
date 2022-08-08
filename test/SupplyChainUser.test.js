@@ -3,7 +3,7 @@ const SupplyChainStorage = artifacts.require("SupplyChainStorage");
 
 const _name = "John Quevedo";
 const _email = "farmertest@gmail.com";
-const _role = "FARMER";
+const _role = ["FARMER", "SELLER"];
 const _isActive = true;
 const _profileHash = "Qmadp4L61MaQQX5NFfjqaihnY8r7PmogqZL6wvX1HqwL";
 
@@ -30,20 +30,21 @@ contract("SupplyChainUser", function (accounts) {
 		const { logs } = await this.userContract.updateUser(
 			_name,
 			_email,
-			_role,
+			// _role,
 			_isActive,
 			_profileHash,
 			{ from: userAddress }
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
+		// console.log("new user: ", user);
 
-		checkUserData(user, function (result) {
-			console.log(result);
+		checkUserDataUser(user, function (result) {
+			// console.log(result);
 		});
 	});
 
@@ -59,13 +60,13 @@ contract("SupplyChainUser", function (accounts) {
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
 
 		checkUserData(user, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 	});
 
@@ -81,13 +82,13 @@ contract("SupplyChainUser", function (accounts) {
 		);
 
 		checkUserExists(logs, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 
 		const user = await this.userContract.getUser.call(userAddress);
 
 		checkUserData(user, function (result) {
-			console.log(result);
+			// console.log(result);
 		});
 	});
 });
@@ -105,7 +106,22 @@ function checkUserExists(logs, callback) {
 function checkUserData(user, callback) {
 	assert.equal(user[0], _name, "Name checked:");
 	assert.equal(user[1], _email, "email No checked:");
-	assert.equal(user[2], _role, "Role checked:");
+	assert.equal(user[3], _isActive, "isActive checked:");
+	assert.equal(user[4], _profileHash, "Profile Hash checked:");
+
+	for (let i = 0; i < user[2].length; i++) {
+		assert.equal(user[2][i], _role[i], "Role checked:");
+	}
+
+	assert.isTrue(true);
+
+	callback(true);
+}
+
+function checkUserDataUser(user, callback) {
+	assert.equal(user[0], _name, "Name checked:");
+	assert.equal(user[1], _email, "email No checked:");
+	assert.equal(user[2], "", "Role checked:");
 	assert.equal(user[3], _isActive, "isActive checked:");
 	assert.equal(user[4], _profileHash, "Profile Hash checked:");
 	assert.isTrue(true);
