@@ -1,7 +1,6 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const { env } = require("process");
 require("dotenv").config();
-const my_address = "0x9E733B413600444663EF0FFd8116A279D8C07D7D";
 
 module.exports = {
 	networks: {
@@ -34,7 +33,7 @@ module.exports = {
 			confirmations: 2,
 			timeoutBlocks: 200,
 			skipDryRun: true,
-			from: my_address,
+			from: `${env.MY_ADDRESS}`,
 		},
 	},
 	compilers: {

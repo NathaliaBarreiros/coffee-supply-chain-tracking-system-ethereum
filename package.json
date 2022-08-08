@@ -10,12 +10,12 @@
     "@truffle/hdwallet-provider": "^2.0.7",
     "async": ">2.6.4",
     "dotenv": "^16.0.0",
-    "node-fetch": ">=2.6.7"
+    "node-fetch": ">=3.2.10"
   },
   "devDependencies": {
     "truffle-plugin-verify": "^0.5.25",
     "async": ">2.6.4",
-    "node-fetch": ">=2.6.7"
+    "node-fetch": ">=3.2.10"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
