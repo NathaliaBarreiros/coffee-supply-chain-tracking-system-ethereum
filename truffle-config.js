@@ -26,19 +26,20 @@ module.exports = {
 			provider: () =>
 				new HDWalletProvider(
 					env.MNEMONIC_2,
-					`https://rinkeby.infura.io/v3/${env.PROJECT_ID}`
+					`wss://rinkeby.infura.io/ws/v3/${env.PROJECT_ID}`
 				),
 			network_id: 4,
 			gas: 6500000,
 			confirmations: 2,
 			timeoutBlocks: 200,
+			networkCheckTimeoutnetworkCheckTimeout: 10000,
 			skipDryRun: true,
 			from: `${env.MY_ADDRESS}`,
 		},
 	},
 	compilers: {
 		solc: {
-			version: "0.8.15",
+			version: "0.8.16",
 		},
 	},
 	plugins: ["truffle-plugin-verify"],
@@ -46,3 +47,5 @@ module.exports = {
 		etherscan: `${env.MY_API_KEY}`,
 	},
 };
+
+// `https://rinkeby.infura.io/v3/${env.PROJECT_ID}`
