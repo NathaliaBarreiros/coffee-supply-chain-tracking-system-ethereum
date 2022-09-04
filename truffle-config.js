@@ -36,6 +36,16 @@ module.exports = {
 			skipDryRun: true,
 			from: `${env.MY_ADDRESS}`,
 		},
+		matic: {
+			provider: () =>
+				new HDWalletProvider(env.MNEMONIC, `https://rpc-mumbai.maticvigil.com`),
+			network_id: 80001,
+			gas: 6500000,
+			confirmations: 2,
+			timeoutBlocks: 200,
+			skipDryRun: true,
+			from: `${env.MY_ADDRESS}`,
+		},
 	},
 	compilers: {
 		solc: {
@@ -47,5 +57,3 @@ module.exports = {
 		etherscan: `${env.MY_API_KEY}`,
 	},
 };
-
-// `https://rinkeby.infura.io/v3/${env.PROJECT_ID}`
