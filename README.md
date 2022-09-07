@@ -334,3 +334,10 @@ truffle run verify SupplyChainUser –network rinkeby
 truffle compile
 truffle test –network ganache
 ```
+
+- Para realizar los despliegues en la blockchain local con Ganache, usar los comandos:
+
+```
+truffle compile
+truffle migrate –network ganache
+```
