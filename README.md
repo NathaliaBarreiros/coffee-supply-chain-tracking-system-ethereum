@@ -121,7 +121,9 @@ git clone https://github.com/NathaliaBarreiros/coffee-supply-chain-tracking-syst
 cd coffee-supply-chain-tracking-system-ethereum/
 ```
 
-2. Establecer las variables de entorno del proyecto. Para esto se crea un archivo .env en la carpeta raíz del proyecto, se copia el contenido del archivo .env.example y se configuran las variables de entorno de manera personalizada.
+2. Establecer las variables de entorno del proyecto. Para esto se crea un archivo .env en la carpeta raíz del proyecto, se copia el contenido del archivo [.env.example](https://github.com/NathaliaBarreiros/coffee-supply-chain-tracking-system-ethereum/blob/main/.env.example)
+
+y se configuran las variables de entorno de manera personalizada.
 
 3. Instalación de librerías requeridas, compilación y despliegue de los contratos, se ejecutan los comandos:
 
