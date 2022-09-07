@@ -135,7 +135,7 @@ truffle compile
 truffle migrate --network rinkeby reset
 ```
 
-Después de la implementación exitosa se obtiene una respuesta en la terminal como se muestra a continuación:
+Después de la implementación exitosa de los contratos inteligentes en la testnet Rinkeby, se obtiene una respuesta en la terminal similar a la siguiente:
 
 ```
 Compiling your contracts...
