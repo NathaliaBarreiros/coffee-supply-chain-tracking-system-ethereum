@@ -15,7 +15,7 @@ La arquitectura completa del sistema de tracking consta de 3 componentes:
 3. Aplicación web basada en React como librería de desarrollo y Ethers.js como librería para interactuar con el ecosistema de la cadena de bloques de Ethereum. El código fuente de la aplicación web puede consultarse [aquí](https://github.com/NathaliaBarreiros/coffee-supply-chain-client).
 
 <p align="center">
-  <img src="images/diagrama-sistema.png" align="center" width="600" height="350"/>
+  <img src="images/diagrama-sistema.png" align="center" />
 </p>
 
 ## Contratos inteligentes
