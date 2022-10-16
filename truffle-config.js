@@ -36,6 +36,20 @@ module.exports = {
 			skipDryRun: true,
 			from: `${env.MY_ADDRESS}`,
 		},
+		goerli: {
+			provider: () =>
+				new HDWalletProvider(
+					env.MNEMONIC_2,
+					`wss://goerli.infura.io/ws/v3/${env.PROJECT_ID}`
+				),
+			network_id: 5,
+			gas: 6500000,
+			confirmations: 2,
+			timeoutBlocks: 200,
+			networkCheckTimeoutnetworkCheckTimeout: 10000,
+			skipDryRun: true,
+			from: `${env.MY_ADDRESS}`,
+		},
 		matic: {
 			provider: () =>
 				new HDWalletProvider(env.MNEMONIC, `https://rpc-mumbai.maticvigil.com`),
@@ -49,7 +63,7 @@ module.exports = {
 	},
 	compilers: {
 		solc: {
-			version: "0.8.16",
+			version: "0.8.17",
 		},
 	},
 	plugins: ["truffle-plugin-verify"],

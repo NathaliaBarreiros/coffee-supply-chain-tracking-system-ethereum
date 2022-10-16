@@ -8,7 +8,7 @@ Este proyecto tiene como objetivo rastrear la cadena de suministro del café de 
 
 La arquitectura completa del sistema de tracking consta de 3 componentes:
 
-1. Contratos inteligentes desarrollados en el lenguaje de programación Solidity y ejecutados en la testnet Rinkeby, los cuales describen toda la lógica del sistema de tracking implementado.
+1. Contratos inteligentes desarrollados en el lenguaje de programación Solidity y ejecutados en la testnet Goerli, los cuales describen toda la lógica del sistema de tracking implementado.
 
 2. Integración entre la aplicación web con los contratos inteligentes por medio de la billetera digital MetaMask, instalada como extensión del navegador web.
 
@@ -25,7 +25,7 @@ La arquitectura completa del sistema de tracking consta de 3 componentes:
 Este proyecto describe la implementación de los contratos inteligentes. Se empleó el entorno de desarrollo y marco de pruebas de Truffle para desarrollar los contratos inteligentes, los scripts de despliegue y los tests.
 
 En el script [truffle-config.js](https://github.com/NathaliaBarreiros/coffee-supply-chain-tracking-system-ethereum/blob/main/truffle-config.js)
-se establecen las conexiones de red a la blockchain testnet Rinkeby y a la blockchain local utilizando la herramienta Ganache de Truffle Suite.
+se establecen las conexiones de red a la blockchain testnet Goerli y a la blockchain local utilizando la herramienta Ganache de Truffle Suite.
 
 ### Etapas del sistema de tracking según los roles modificadores en la cadena de suministro del café de especialidad
 
@@ -106,7 +106,7 @@ dato, las funciones, los atributos y las llamadas de función que presentan las 
 - Sistema Operativo: Linux Ubuntu 20.04 LTS +
 - Nodejs: v16.15.0
 - Truffle: v5.4.32
-- Solidity Compiler: v0.8.16
+- Solidity Compiler: v0.8.17
 - Git: v2.26.2
 - Aplicación de escritorio de Ganache: v2.5.4
 
@@ -130,10 +130,10 @@ rm -rf build/
 npm install @truffle/hdwallet-provider
 npm install truffle-plugin-verify
 truffle compile
-truffle migrate --network rinkeby reset
+truffle migrate --network goerli reset
 ```
 
-Después de la implementación exitosa de los contratos inteligentes en la testnet Rinkeby, se obtiene una respuesta en la terminal similar a la siguiente:
+Después de la implementación exitosa de los contratos inteligentes en la testnet Goerli, se obtiene una respuesta en la terminal similar a la siguiente:
 
 ```
 Compiling your contracts...
@@ -144,8 +144,8 @@ Compiling your contracts...
 
 Starting migrations...
 ======================
-> Network name:    'rinkeby'
-> Network id:      4
+> Network name:    'goerli'
+> Network id:      5
 > Block gas limit: 30000000 (0x1c9c380)
 
 
@@ -308,23 +308,23 @@ Summary
 
 Las direcciones de los contratos inteligentes pueden ser consultadas en el explorador Etherscan.
 
-- [SupplyChainStorage.sol](https://rinkeby.etherscan.io/address/0x8d634bf42f06d7904dd46d8ed4ab345230a03b7d#code)
-- [SupplyChainStorage2.sol](https://rinkeby.etherscan.io/address/0x1e3DDD059f0F01258A7baC74dfBA2cA43C33A449#code)
-- [CoffeeSupplyChain.sol](https://rinkeby.etherscan.io/address/0xdf0C594655C466B0b37CeFc519f38Ea8fEB465F9#code)
-- [CoffeeSupplyChain2.sol](https://rinkeby.etherscan.io/address/0xcf76465C29A32F11D6A27a009eE7CB500669c5Ff#code)
-- [SupplyChainUser.sol](https://rinkeby.etherscan.io/address/0xbf87Fd7e3416311dbef4F00e2ce73950A0F2a0D2#code)
+- [SupplyChainStorage.sol](https://goerli.etherscan.io/address/0xe8D36ecaE77D2a5d231C3623F7E823d30d91d9Bc#code)
+- [SupplyChainStorage2.sol](https://goerli.etherscan.io/address/0x0bbc6B2FA1C1D2AE1d72e039b3bCb0C42aAcbB0C#code)
+- [CoffeeSupplyChain.sol](https://goerli.etherscan.io/address/0x588774DEd56c4395A4b2115931e2B1379d29980d#code)
+- [CoffeeSupplyChain2.sol](https://goerli.etherscan.io/address/0x4213D059E4c1a9830BD41a7830082C9cEE95CcbA#code)
+- [SupplyChainUser.sol](https://goerli.etherscan.io/address/0xB7afe31dD99bC184AEa39F3666B2188e63205aB1#code)
 
 Las direcciones de los contratos `CoffeeSupplyChain.sol`, `CoffeeSupplyChain2.sol` y `SupplyChainUser.sol` deben
 ser copiadas para configurar la [aplicación web](https://github.com/NathaliaBarreiros/coffee-supply-chain-client).
 
-4. Para llevar a cabo la verificación de los contratos inteligentes desplegados en la testnet de Rinkeby, se ejecutan los siguientes comandos:
+4. Para llevar a cabo la verificación de los contratos inteligentes desplegados en la testnet de Goerli, se ejecutan los siguientes comandos:
 
 ```
-truffle run verify SupplyChainStorage –network rinkeby
-truffle run verify SupplyChainStorage2 –network rinkeby
-truffle run verify CoffeeSupplyChain –network rinkeby
-truffle run verify CoffeeSupplyChain2 –network rinkeby
-truffle run verify SupplyChainUser –network rinkeby
+truffle run verify SupplyChainStorage –network goerli
+truffle run verify SupplyChainStorage2 –network goerli
+truffle run verify CoffeeSupplyChain –network goerli
+truffle run verify CoffeeSupplyChain2 –network goerli
+truffle run verify SupplyChainUser –network goerli
 
 ```
 
